@@ -432,7 +432,6 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    # family: Lato
     family: Noto Serif SC, Noto Serif KR, MS PMincho
     size: 0.9
 

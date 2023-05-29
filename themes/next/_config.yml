@@ -421,7 +421,8 @@ font:
   enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
-  host: https://fonts.lug.ustc.edu.cn
+  host: https://fonts.googleapis.com
+  # host: https://fonts.lug.ustc.edu.cn
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -431,8 +432,7 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    # family: Lato
-    family: Noto Serif SC
+    family: Noto Serif SC, Noto Serif KR, MS PMincho
     size: 0.9
 
   # Font settings for site title (.site-title).
