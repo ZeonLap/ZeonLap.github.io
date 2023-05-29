@@ -432,25 +432,25 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Noto Serif SC, Noto Serif KR, MS PMincho
+    family: Noto Serif SC
     size: 0.9
 
   # Font settings for site title (.site-title).
   title:
     external: true
-    family: Noto Serif SC, Noto Serif KR, MS PMincho
+    family: Noto Serif SC
     size:
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family: Noto Serif SC, Noto Serif KR, MS PMincho
+    family: Noto Serif SC
     size:
 
   # Font settings for posts (.post-body).
   posts:
     external: true
-    family: Noto Serif SC, Noto Serif KR, MS PMincho
+    family: Noto Serif SC
 
   # Font settings for <code> and code blocks.
   codes:
