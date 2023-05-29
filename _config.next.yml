@@ -433,7 +433,7 @@ font:
   global:
     external: true
     # family: Lato
-    family: Noto Serif SC
+    family: Noto Serif SC, Noto Serif KR, MS PMincho
     size: 0.9
 
   # Font settings for site title (.site-title).
