@@ -7,8 +7,8 @@ description:
 categories: 
   - 生活
   - 日记
+layout: default
 ---
-
 # 20230405
 
 有差不多一周没更新Blog了，突然发现四月了，也该开一个新的文章了。

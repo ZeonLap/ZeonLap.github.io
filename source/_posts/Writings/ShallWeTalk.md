@@ -7,8 +7,8 @@ description:
 categories: 
   - 生活
   - 写作
+layout: default
 ---
-
 你问我，**这是我想要的生活吗？**
 
 ![软工的小船](shallwetalk/1.pic.jpg)
@@ -18,4 +18,3 @@ categories:
 ![延迟满足](shallwetalk/IMG_0597.png)
 
 **“如果心声真有疗效，谁怕暴露更多”**
-
