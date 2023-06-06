@@ -1,5 +1,6 @@
 ---
-title: Long Time No See!
+title: 关于
+layout: about
 date: 2023-01-18
 description:
   - 这是一篇关于LTNSXD的介绍
@@ -17,7 +18,7 @@ sticky: 1
 
   - <ruby>好<rt>hou</rt>耐<rt>noi</rt>冇<rt>mou</rt>见<rt>gin</rt></ruby>
 - 清华大学$新雅书院 \times 计算机系$在读的本科生
-  - $<新雅13，计14>$
+  - $<新雅13, 计14>$
 - 广东广州人（成长），浙江舟山人（祖籍）
   - 可惜他只识得讲普通话，掌握粤语和吴语一直是他的目标
 - 真知者与传知者
