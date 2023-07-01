@@ -112,6 +112,11 @@
     <footer class="article-footer">
       
       
+        <a href="#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="" itemprop="commentCount"></span>
+          留言
+        </a>
+      
       
     </footer>
   </div>
@@ -144,6 +149,10 @@
 </article>
 
 
+
+  <section id="comments" class="vcomment">
+
+  </section>
 </section>
         
           <aside id="sidebar">
@@ -228,6 +237,29 @@
 
 
 
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "sZwPhNQ0F1xzD0PAZt4Sxs9h-gzGzoHsz",
+        appKey: "uUh6uhCW8A5u8AV3ln4W48cG",
+        placeholder: "Just go go",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
 
 
 
