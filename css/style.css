@@ -55,12 +55,14 @@ body:after {
 .article-entry strong,
 .widget strong {
   font-weight: bold;
+  color: #800080;
 }
 .article-entry em,
 .widget em,
 .article-entry cite,
 .widget cite {
   font-style: italic;
+  color: #006400;
 }
 .article-entry sup,
 .widget sup,
