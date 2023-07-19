@@ -26,14 +26,17 @@ body:after {
 .article-entry h1,
 .widget h1 {
   font-size: 2em;
+  color: #191970;
 }
 .article-entry h2,
 .widget h2 {
   font-size: 1.5em;
+  color: #191970;
 }
 .article-entry h3,
 .widget h3 {
   font-size: 1.3em;
+  color: #191970;
 }
 .article-entry h4,
 .widget h4 {
