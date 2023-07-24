@@ -352,9 +352,9 @@
 
 
   
-    <article id="default-docs/2023Summer/nextjs" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="default-docs/2023Summer/nestjs" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="../2023/07/20/docs/2023Summer/nextjs/" class="article-date">
+    <a href="../2023/07/20/docs/2023Summer/nestjs/" class="article-date">
   <time class="dt-published" datetime="2023-07-19T16:00:00.000Z" itemprop="datePublished">2023-07-20</time>
 </a>
     
@@ -370,7 +370,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="../2023/07/20/docs/2023Summer/nextjs/">NestJS</a>
+      <a class="p-name article-title" href="../2023/07/20/docs/2023Summer/nestjs/">NestJS</a>
     </h1>
   
 
@@ -379,9 +379,25 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="why-nestjs?">Why NestJS?</h2>
+        <h2 id="前言">前言</h2>
+<p>暑期在某公司实习<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>工作便是写后端(tnnd, 艹)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>公司的框架是React + Nest<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>挺好的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>NodeJS开会了属于是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h2 id="nestjs是什么<span-class=" bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char>">NestJS是什么<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span></h2>
 <ul>
-<li><s>因为实习公司是用nestjs写的后端</s></li>
+<li>Nest(NestJS)在Node.js框架之上提高了一个抽象级别<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>提供了一个开箱即用的应用程序架构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>允许开发人员团队创建高度可测试<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>可扩展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span><strong>松耦合</strong>且易于维护的应用程序<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+<blockquote>
+<p>这段话虽然简单<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>但也阐述了NestJS的主要特点<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>它解决的是Node.js生态开发中的架构问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>也就是说使用它<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>你就就会获得不错的后端架构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>而且它还表明了这个架构的特点<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>高度可测试<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>可扩展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>松散耦合易于维护<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span> NestJS还有一些特点<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>它使用渐进式JavaScript<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>内置并完全支持TypeScript<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>但你也可以使用纯JS来进行开发<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>并结合了OOP<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>面向对象编程<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>FP<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>函数式编程<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>和FRP(函数式响应编程)的元素<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这些特点保证了NestJS是一个高度可扩展和松散耦合度的框架<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>也就我们开发时常说的<strong>高内聚低耦合</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>Node.js 是什么<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span></strong></p>
+<p>Node.js是一个基于Chrome V8引擎的JavaScript运行环境<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>简单来说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>Node.js为JavaScript代码的运行提供了必要的环境<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>包管理器</strong></p>
+<p>Node.js常见的包管理器有<strong>npm, yarn, pnpm</strong>三个<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>目前最常用的应该是yarn<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其特点为<strong>扁平化依赖<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>并行安装<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>本地缓存</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>安装: <code>npm i -g yarn</code></p>
+</blockquote>
+<h2 id="why-nestjs?">Why NestJS?</h2>
+<ul>
+<li><s>因为实习公司是用nestjs写的后端<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>芝之后大概率也得用基于nodejs的后端框架<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></s></li>
 </ul>
 <h2 id="ioc控制反转/di依赖注入">IoC控制反转/DI依赖注入</h2>
 <p><strong>IoC(Inversion of Control)</strong>字面意思为控制反转<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>具体含义为高层模块不依赖底层模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者都应该依赖于其抽象<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
@@ -431,58 +447,8 @@ npm install --save-dev @types/passport-local
     <footer class="article-footer">
       
       
-        <a href="../2023/07/20/docs/2023Summer/nextjs/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="../2023/07/20/docs/2023Summer/nextjs/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="default-docs/2022Fall/ICS" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="../2023/07/07/docs/2022Fall/ICS/" class="article-date">
-  <time class="dt-published" datetime="2023-07-06T16:00:00.000Z" itemprop="datePublished">2023-07-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="../categories/%E6%96%87%E6%A1%A3/">文档</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="../2023/07/07/docs/2022Fall/ICS/">《计算机系统概论》课程笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>TODO: 把ICS的课程笔记整理上来</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-        <a href="../2023/07/07/docs/2022Fall/ICS/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="../2023/07/07/docs/2022Fall/ICS/" itemprop="commentCount"></span>
+        <a href="../2023/07/20/docs/2023Summer/nestjs/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="../2023/07/20/docs/2023Summer/nestjs/" itemprop="commentCount"></span>
           留言
         </a>
       
@@ -563,11 +529,7 @@ npm install --save-dev @types/passport-local
       <ul>
         
           <li>
-            <a href="../2023/07/20/docs/2023Summer/nextjs/">NestJS</a>
-          </li>
-        
-          <li>
-            <a href="../2023/07/07/docs/2022Fall/ICS/">《计算机系统概论》课程笔记</a>
+            <a href="../2023/07/20/docs/2023Summer/nestjs/">NestJS</a>
           </li>
         
           <li>
