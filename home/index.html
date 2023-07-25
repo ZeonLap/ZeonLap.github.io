@@ -383,8 +383,8 @@
 <h3 id="异步">异步</h3>
 <p>JavaScript语言是一门单线程语言<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>一次只能完成一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>若有多个任务执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>必须按照队列来执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即前一个任务完成以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再执行下一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>在这种模式下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>只要有一个任务执行消耗了很长时间<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>后面的任务都无法执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>常见的浏览器无响应(假死)往往就是因为这样的原因而发生的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>为了解决这个问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>JS将任务执行模式分成同步和异步<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<p>**同步: **后一个任务等待前一个任务结束后再执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>程序的执行顺序和任务的排列顺序是一致的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>同步的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p>**异步: **每一个任务有一个或多个回调函数(Callback)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>前一个任务结束后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不是执行后一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是执行回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span>后一个任务则不等前一个任务结束就执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>同步: </strong>后一个任务等待前一个任务结束后再执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>程序的执行顺序和任务的排列顺序是一致的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>同步的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>异步: </strong>每一个任务有一个或多个<strong>回调函数(Callback)</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>前一个任务结束后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不是执行后一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是执行回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span>后一个任务则不等前一个任务结束就执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
 <li>看个例子<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></li>
 </ul>
@@ -402,8 +402,35 @@ b = a + <span class="hljs-number">1</span>;
 <p>这其中的<code>foo</code>就是回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>所谓回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>就是被主线程放到<strong>任务队列</strong>中的代码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>等到所有同步代码执行完成后才会被执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>不过在Nest中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们更常使用的工具不是回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是<code>Promise</code>与<code>async</code>, <code>await</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
-<li>Promise:</li>
+<li><strong>Promise: </strong>Promise对象表示<strong>一个异步操作的最终结果</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>一个Promise对象的当前状态可以为<strong>Pending</strong>, <strong>Fulfilled</strong>, <strong>Rejected</strong>中的其中一个<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>与Promise对象交互的主要是<code>then</code>方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>该方法注册了两个回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>用于接收promise的终值或本promise不能执行的原因<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+<li><strong>then方法: </strong>then方法接收两个可选参数: <code>promise.then(onFulfilled, onRejected)</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>如果<code>onFulfilled</code>是函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>当promise执行结束后其必须被调用<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>且第一个参数为promise的终值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span><code>onRejected</code>同理<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>第一个参数为promise的拒因<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>then方法最终返回一个promise对象<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
 </ul>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;LTNS&#x27;</span>
+&#125;
+foo().then(<span class="hljs-built_in">console</span>.log)
+
+<span class="hljs-comment">// 输出: LTNS</span>
+</code></pre></div>
+<ul>
+<li><strong>async/await: </strong>async与await实际是promise的语法糖
+<ul>
+<li><strong>async: </strong>函数前的async关键字意味着这个函数总返回一个promise值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即使你没有显式地那么写<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>就这么简单<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+<li><strong>await: </strong>await关键字只能在async函数中使用<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>他可以让js等待<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直到一个promise执行并返回它的结果<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>js才会继续往下执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="arraymap()">Array.map()</h3>
+<p>这是一个非常重要的方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>简单来说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>你可以把以下这段typescript代码和python代码做类比<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>他们的功效是一样的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">var</span> a: <span class="hljs-built_in">number</span>[] = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">var</span> res = a.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x ** <span class="hljs-number">2</span>);
+</code></pre></div>
+<div class="highlight"><pre class="code"><code>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a]
+</code></pre></div>
+<p>另外<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>如果要在map中使用异步函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>需要像下面这样做</p>
+<div class="highlight"><pre class="code"><code><span class="hljs-comment">// TODO</span>
+</code></pre></div>
 <h2 id="nestjs是什么?">NestJS是什么?</h2>
 <ul>
 <li>Nest(NestJS)在Node.js框架之上提高了一个抽象级别<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>提供了一个开箱即用的应用程序架构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>允许开发人员团队创建高度可测试<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>可扩展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span><strong>松耦合</strong>且易于维护的应用程序<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
