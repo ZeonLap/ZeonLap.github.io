@@ -9,9 +9,9 @@
   
   <meta name="description" content="前言
 暑期在某公司实习，工作便是写后端(tnnd, 艹)。公司的框架是React + Nest，挺好的，NodeJS开会了属于是。
-NestJS是什么?
-
-Nest(NestJS)在Node.js框架之上提高了一个抽象级别，提供了一个开箱即用的应用程序架构，允许开发人员团队创建高度可测试、可扩展、松">
+一些前置知识
+异步
+JavaScript语言是一门单线程语言，一次只能完成一个任务。若有多个任务执行，必须按照队列来执行，即前一个任务完成以后，再执行下一个任务。在这种">
   
   
   
@@ -81,13 +81,38 @@ Nest(NestJS)在Node.js框架之上提高了一个抽象级别，提供了一个�
     
 <div id="article-toc">
     <h2 class="widget-title">目录</h2>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nestjs%E6%98%AF%E4%BB%80%E4%B9%88?"><span class="toc-number">2.</span> <span class="toc-text">NestJS是什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#controller(%E6%8E%A7%E5%88%B6%E5%99%A8)%E4%B8%8E%E8%B7%AF%E7%94%B1"><span class="toc-number">3.</span> <span class="toc-text">Controller(控制器)与路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ioc%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC/di%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">4.</span> <span class="toc-text">IoC控制反转&#x2F;DI依赖注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">6.</span> <span class="toc-text">数据库相关操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%89%B4%E6%9D%83"><span class="toc-number">7.</span> <span class="toc-text">鉴权</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">一些前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5"><span class="toc-number">2.1.</span> <span class="toc-text">异步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nestjs%E6%98%AF%E4%BB%80%E4%B9%88?"><span class="toc-number">3.</span> <span class="toc-text">NestJS是什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#controller(%E6%8E%A7%E5%88%B6%E5%99%A8)%E4%B8%8E%E8%B7%AF%E7%94%B1"><span class="toc-number">4.</span> <span class="toc-text">Controller(控制器)与路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ioc%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC/di%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">5.</span> <span class="toc-text">IoC控制反转&#x2F;DI依赖注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">6.</span> <span class="toc-text">装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">数据库相关操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%89%B4%E6%9D%83"><span class="toc-number">8.</span> <span class="toc-text">鉴权</span></a></li></ol>
 </div>
 
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="前言">前言</h2>
 <p>暑期在某公司实习<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>工作便是写后端(tnnd, 艹)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>公司的框架是React + Nest<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>挺好的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>NodeJS开会了属于是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h2 id="一些前置知识">一些前置知识</h2>
+<h3 id="异步">异步</h3>
+<p>JavaScript语言是一门单线程语言<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>一次只能完成一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>若有多个任务执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>必须按照队列来执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即前一个任务完成以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再执行下一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>在这种模式下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>只要有一个任务执行消耗了很长时间<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>后面的任务都无法执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>常见的浏览器无响应(假死)往往就是因为这样的原因而发生的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>为了解决这个问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>JS将任务执行模式分成同步和异步<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<p>**同步: **后一个任务等待前一个任务结束后再执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>程序的执行顺序和任务的排列顺序是一致的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>同步的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>**异步: **每一个任务有一个或多个回调函数(Callback)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>前一个任务结束后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不是执行后一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是执行回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span>后一个任务则不等前一个任务结束就执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<ul>
+<li>看个例子<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></li>
+</ul>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">var</span> a: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> b: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
+    a = <span class="hljs-number">1</span>;
+&#125;
+<span class="hljs-built_in">setTimeout</span>(foo, <span class="hljs-number">1000</span>);
+b = a + <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(b);
+
+<span class="hljs-comment">// 输出: 1</span>
+</code></pre></div>
+<p>这其中的<code>foo</code>就是回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>所谓回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>就是被主线程放到<strong>任务队列</strong>中的代码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>等到所有同步代码执行完成后才会被执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>不过在Nest中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们更常使用的工具不是回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是<code>Promise</code>与<code>async</code>, <code>await</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<ul>
+<li>Promise:</li>
+</ul>
 <h2 id="nestjs是什么?">NestJS是什么?</h2>
 <ul>
 <li>Nest(NestJS)在Node.js框架之上提高了一个抽象级别<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>提供了一个开箱即用的应用程序架构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>允许开发人员团队创建高度可测试<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>可扩展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span><strong>松耦合</strong>且易于维护的应用程序<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>

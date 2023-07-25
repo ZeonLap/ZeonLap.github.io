@@ -379,6 +379,31 @@
       
         <h2 id="前言">前言</h2>
 <p>暑期在某公司实习<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>工作便是写后端(tnnd, 艹)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>公司的框架是React + Nest<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>挺好的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>NodeJS开会了属于是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h2 id="一些前置知识">一些前置知识</h2>
+<h3 id="异步">异步</h3>
+<p>JavaScript语言是一门单线程语言<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>一次只能完成一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>若有多个任务执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>必须按照队列来执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即前一个任务完成以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再执行下一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>在这种模式下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>只要有一个任务执行消耗了很长时间<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>后面的任务都无法执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>常见的浏览器无响应(假死)往往就是因为这样的原因而发生的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>为了解决这个问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>JS将任务执行模式分成同步和异步<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<p>**同步: **后一个任务等待前一个任务结束后再执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>程序的执行顺序和任务的排列顺序是一致的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>同步的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>**异步: **每一个任务有一个或多个回调函数(Callback)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>前一个任务结束后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不是执行后一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是执行回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span>后一个任务则不等前一个任务结束就执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<ul>
+<li>看个例子<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></li>
+</ul>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">var</span> a: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> b: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
+    a = <span class="hljs-number">1</span>;
+&#125;
+<span class="hljs-built_in">setTimeout</span>(foo, <span class="hljs-number">1000</span>);
+b = a + <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(b);
+
+<span class="hljs-comment">// 输出: 1</span>
+</code></pre></div>
+<p>这其中的<code>foo</code>就是回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>所谓回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>就是被主线程放到<strong>任务队列</strong>中的代码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>等到所有同步代码执行完成后才会被执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>不过在Nest中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们更常使用的工具不是回调函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而是<code>Promise</code>与<code>async</code>, <code>await</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<ul>
+<li>Promise:</li>
+</ul>
 <h2 id="nestjs是什么?">NestJS是什么?</h2>
 <ul>
 <li>Nest(NestJS)在Node.js框架之上提高了一个抽象级别<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>提供了一个开箱即用的应用程序架构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>允许开发人员团队创建高度可测试<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>可扩展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span><strong>松耦合</strong>且易于维护的应用程序<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
