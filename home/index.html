@@ -379,7 +379,7 @@
       
         <h2 id="前言">前言</h2>
 <p>暑期在某公司实习<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>工作便是写后端(tnnd, 艹)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>公司的框架是<strong>React + Nest</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>挺好的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>NodeJS开会了属于是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p>这篇文档主要记录我在生产中遇到的实际问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>由于之前用过Django<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>所以大多地方可能比较简略<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>反正写前后端<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>意思不大(x)</p>
+<p>这篇文档主要记录我在生产中遇到的实际问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>由于之前用过Django<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>所以大多地方可能比较简略<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>更详细的内容可以去看<a target="_blank" rel="noopener" href="https://docs.nestjs.cn">Nest中文文档</a><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h2 id="一些前置知识">一些前置知识</h2>
 <h3 id="异步">异步</h3>
 <p>JavaScript语言是一门单线程语言<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>一次只能完成一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>若有多个任务执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>必须按照队列来执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即前一个任务完成以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再执行下一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>在这种模式下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>只要有一个任务执行消耗了很长时间<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>后面的任务都无法执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>常见的浏览器无响应(假死)往往就是因为这样的原因而发生的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
@@ -493,10 +493,42 @@ res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</s
 <ul>
 <li><strong>TypeORM中的Entity</strong></li>
 </ul>
-<h2 id="ioc控制反转/di依赖注入">IoC控制反转/DI依赖注入</h2>
-<p><strong>IoC(Inversion of Control)</strong>字面意思为控制反转<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>具体含义为高层模块不依赖底层模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者都应该依赖于其抽象<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>DI(Dependency Injection)</strong>和IoC是同源的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>IoC是设计思想<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而DI是实现方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p>简单来说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>…</p>
+<p>我们需要为表中的数据编写实体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>例如:</p>
+<div class="highlight"><pre class="code"><code><span class="hljs-meta">@filename</span>(<span class="hljs-string">&#x27;base.ts&#x27;</span>)
+<span class="hljs-keyword">import</span> &#123;
+  CreateDateColumn,
+  DeleteDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;typeorm&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span> </span>&#123;
+  <span class="hljs-meta">@PrimaryGeneratedColumn</span>()
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-meta">@CreateDateColumn</span>(&#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;datetime&#x27;</span> &#125;)
+  <span class="hljs-attr">created_at</span>: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-meta">@UpdateDateColumn</span>(&#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;datetime&#x27;</span> &#125;)
+  <span class="hljs-attr">updated_at</span>: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-meta">@DeleteDateColumn</span>(&#123; <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;datetime&#x27;</span> &#125;)
+  deleted_at?: <span class="hljs-built_in">number</span>;
+&#125;
+
+<span class="hljs-meta">@filename</span>(<span class="hljs-string">&#x27;SomeEntity.ts&#x27;</span>)
+<span class="hljs-keyword">import</span> &#123; Entity &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;typeorm&#x27;</span>
+<span class="hljs-keyword">import</span> &#123; Base &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./base&#x27;</span>
+
+<span class="hljs-meta">@Entity</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeEntity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Base</span> </span>&#123;
+  <span class="hljs-comment">// Definitions</span>
+&#125;
+</code></pre></div>
+<p>可以看到<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这里先实现了一个Base类作为其他所有实体的抽象基类<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>提供一些所有Entity都具有的属性<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>当然也可以不这么做<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<ul>
+<li><strong>增删查改</strong></li>
+</ul>
 <h2 id="鉴权">鉴权</h2>
 <p><strong>Passport</strong>是最流行的<strong>node.js</strong>身份验证库<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
@@ -505,6 +537,11 @@ res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</s
 <div class="highlight"><pre class="code"><code>npm install --save @nestjs/passport passport passport-local
 npm install --save-dev @types/passport-local
 </code></pre></div>
+<h2 id="进阶话题">进阶话题</h2>
+<h3 id="ioc控制反转/di依赖注入">IoC控制反转/DI依赖注入</h3>
+<p><strong>IoC(Inversion of Control)</strong>字面意思为控制反转<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>具体含义为高层模块不依赖底层模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者都应该依赖于其抽象<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>DI(Dependency Injection)</strong>和IoC是同源的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>IoC是设计思想<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而DI是实现方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>简单来说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>…</p>
 
       
     </div>
