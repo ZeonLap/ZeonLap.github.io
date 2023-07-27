@@ -430,7 +430,7 @@ foo().then(<span class="hljs-built_in">console</span>.log)
 res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a]
 </code></pre></div>
 <p>另外<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>如果要在map中使用异步函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>需要像下面这样做</p>
-<div class="highlight"><pre class="code"><code><span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(
 	<span class="hljs-built_in">Array</span>.map(<span class="hljs-keyword">async</span> (x) =&gt; &#123;
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> SomeAsyncFunc(x);
   &#125;)
@@ -496,7 +496,7 @@ res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</s
 <h2 id="typeorm">TypeORM</h2>
 <blockquote>
 <p><strong>什么是ORM?</strong></p>
-<p>ORM是Object Relational Mapping的缩写<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>译为<span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>对象关系映射<span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>它解决了对象和关系型数据库之间的数据交互问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>ORM是Object Relational Mapping的缩写<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>译为<span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>对象关系映射<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>它解决了对象和关系型数据库之间的数据交互问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>简单理解ORM的作用<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><strong>定义一个对象<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这个对象对应着一张表<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span>这个对象的一个实例<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>就对应着表中的一条记录<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这样做的好处就在于我们可以通过对象的形式操作数据库<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></strong></p>
 <p><strong>ORM的优缺点:</strong></p>
 <ul>
