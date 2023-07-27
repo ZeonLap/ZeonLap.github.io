@@ -437,8 +437,25 @@ res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</s
 );
 </code></pre></div>
 <h3 id="装饰器">装饰器</h3>
+<blockquote>
+<p>Nest是基于<strong>装饰器</strong>这种语言特性而创建的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>ES2016装饰器是一个表达式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>它<strong>返回一个</strong>可以将目标<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>名称和属性描述符作为参数的函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>通过在装饰器前面添加一个<code>@</code>字符并将其放置在你要装饰的内容的最顶部来应用它<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>可以为<strong>类<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>方法或属性</strong>定义装饰器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+</blockquote>
+<p>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>有一个<code>@sealed</code>装饰器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们会这样定义<code>sealed</code>函数</p>
+<div class="highlight"><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sealed</span>(<span class="hljs-params">target</span>) </span>&#123;
+  <span class="hljs-comment">// do something with &quot;target&quot; ...</span>
+&#125;
+</code></pre></div>
 <ul>
-<li>TODO</li>
+<li><strong>装饰器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></strong>如果我们要定制一个装饰器如何应用到一个声明上<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们得写一个装饰器工厂函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span><em>装饰器工厂就是一个简单的函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>它返回一个表达式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>以供装饰器在运行时调用<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></em></li>
+</ul>
+<div class="highlight"><pre class="code"><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">color</span>(<span class="hljs-params">value: <span class="hljs-built_in">string</span></span>) </span>&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">target</span>) </span>&#123;
+    <span class="hljs-comment">// ...</span>
+  &#125;
+&#125;
+</code></pre></div>
+<ul>
+<li></li>
 </ul>
 <h2 id="nestjs是什么?">NestJS是什么?</h2>
 <ul>
@@ -542,6 +559,15 @@ npm install --save-dev @types/passport-local
 <p><strong>IoC(Inversion of Control)</strong>字面意思为控制反转<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>具体含义为高层模块不依赖底层模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者都应该依赖于其抽象<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>DI(Dependency Injection)</strong>和IoC是同源的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>IoC是设计思想<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而DI是实现方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>简单来说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>…</p>
+<h2 id="一些记录">一些记录</h2>
+<h3 id="migrate失败">Migrate失败</h3>
+<div class="highlight"><pre class="code"><code>export NODE_ENV=cn_test
+yarn migrate
+</code></pre></div>
+<p>然后把不属于我的数据库改动删掉<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>然后再</p>
+<div class="highlight"><pre class="code"><code>yarn execu_migrate
+</code></pre></div>
+<p>就ok了</p>
 
       
     </div>
