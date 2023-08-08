@@ -79,15 +79,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="barbie">Barbie</h2>
-<p>今天是7月30日凌晨<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>29日傍晚和公司(wdl前途有限公司)的小伙伴们一起看了<span class="bd-box"><h-char class="bd bd-end"><h-inner>《</h-inner></h-char></span>芭比<span class="bd-box"><h-char class="bd bd-beg"><h-inner>》</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>我的感受便是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char><h-char class="bd bd-end"><h-inner>《</h-inner></h-char></span>芭比<span class="bd-box"><h-char class="bd bd-beg"><h-inner>》</h-inner></h-char></span>对女性问题与性别不平等问题的解构仍浮于表面<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其传达的许多解决性别问题的方式仍停留于高呼<span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>女性无所不能<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>以及<span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>做自己<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>等政治正确口号<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>如果真要指出它的最大价值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我想不过是提供了历史里为数不多以女性视角诠释世界的作品<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>以至于女性朋友们无需思考电影内核<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>便能从其中体会到一种强烈的<span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>被理解<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>感<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<blockquote>
-<p><span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>要知道中国女人在电影院看一部高纯度女性视角爽片的机会可不多<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span></p>
-</blockquote>
-<p>不论如何<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span></p>
-<ul>
-<li><strong>Barbie</strong></li>
-</ul>
+        <p><strong>老天爷<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>你为何要这样对我<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></strong></p>
 
       
     </div>
@@ -434,7 +426,6 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="前言">前言</h2>
-<p>暑期在某公司实习<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>工作便是写后端(tnnd, 艹)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>公司的框架是<strong>React + Nest</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>挺好的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>NodeJS开会了属于是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>这篇文档主要记录我在生产中遇到的实际问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>由于之前用过Django<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>所以大多地方可能比较简略<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>更详细的内容可以去看<a target="_blank" rel="noopener" href="https://docs.nestjs.cn">Nest中文文档</a><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h2 id="一些前置知识">一些前置知识</h2>
 <h3 id="异步">异步</h3>
@@ -627,6 +618,14 @@ yarn migrate
 <blockquote>
 <p>详情参见项目中cn_test.ts和package.json对migrate脚本的描述</p>
 </blockquote>
+<h3 id="创建新分支">创建新分支</h3>
+<p>功能都维护在<strong>需求管理文档</strong>里<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>git checkout master
+git pull
+git checkout -b &lt;your feature&gt;
+git push -u origin &lt;your feature&gt;
+</code></pre></div>
+<p>然后在这个分支上改就好</p>
 <h3 id="提交方式">提交方式</h3>
 <div class="highlight"><pre class="code"><code>git add &lt;file you edited&gt;
 git commit -m &#x27;description message&#x27; /* 注意Commit lint */
@@ -634,7 +633,7 @@ git commit -m &#x27;description message&#x27; /* 注意Commit lint */
 <p>然后提arc diff</p>
 <div class="highlight"><pre class="code"><code>arc diff
 </code></pre></div>
-<p>diff过了以后合并<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>合并之前最好pull一下<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></p>
+<p>diff过了以后合并<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>合并之前最好先pull一下</p>
 <div class="highlight"><pre class="code"><code>arc land
 git checkout &lt;dest&gt;
 git merge --no-ff &lt;src&gt;
