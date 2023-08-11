@@ -622,8 +622,57 @@ res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</s
 <h3 id="联查">联查</h3>
 <p>让我们从MySQL的联查(Join)开始说起<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>联查应用于从<strong>多个数据表</strong>中读取数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>MySQL中的Join可以分为以下三类<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <ul>
-<li>INNER JOIN<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>获取两个表中字段匹配关系的记录</li>
+<li><strong>INNER JOIN</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>获取两个表中字段匹配关系的记录</li>
 </ul>
+<p>举个例子<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>例子来源于<a href="runoob.com"></a><span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>mysql&gt; use RUNOOB;
+Database changed
+<span class="hljs-section">mysql&gt; SELECT * FROM tcount_tbl;
++---------------+--------------+</span>
+<span class="hljs-section">| runoob_author | runoob_count |
++---------------+--------------+</span>
+| 菜鸟教程  | 10           |
+| RUNOOB.COM    | 20           |
+<span class="hljs-section">| Google        | 22           |
++---------------+--------------+</span>
+3 rows in set (0.01 sec)
+<span class="hljs-code"> </span>
+<span class="hljs-section">mysql&gt; SELECT * from runoob_tbl;
++-----------+---------------+---------------+-----------------+</span>
+<span class="hljs-section">| runoob_id | runoob_title  | runoob_author | submission_date |
++-----------+---------------+---------------+-----------------+</span>
+| 1         | 学习 PHP    | 菜鸟教程  | 2017-04-12      |
+| 2         | 学习 MySQL  | 菜鸟教程  | 2017-04-12      |
+| 3         | 学习 Java   | RUNOOB.COM    | 2015-05-01      |
+| 4         | 学习 Python | RUNOOB.COM    | 2016-03-06      |
+<span class="hljs-section">| 5         | 学习 C      | FK            | 2017-04-05      |
++-----------+---------------+---------------+-----------------+</span>
+5 rows in set (0.01 sec)
+</code></pre></div>
+<p>接下来我们可以使用SQL中的INNER JOIN(也可以省略INNER<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直接用JOIN)来连接以上两张表来读取<strong>runoob_tbl</strong>表中所有<strong>runoob_author</strong>字段在<strong>tcount_tbl</strong>表对应的<strong>runoob_count</strong>字段值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code><span class="hljs-section">mysql&gt; SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a INNER JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
++-------------+-----------------+----------------+</span>
+<span class="hljs-section">| a.runoob_id | a.runoob_author | b.runoob_count |
++-------------+-----------------+----------------+</span>
+| 1           | 菜鸟教程    | 10             |
+| 2           | 菜鸟教程    | 10             |
+| 3           | RUNOOB.COM      | 20             |
+<span class="hljs-section">| 4           | RUNOOB.COM      | 20             |
++-------------+-----------------+----------------+</span>
+4 rows in set (0.00 sec)
+</code></pre></div>
+<p>这等价于</p>
+<div class="highlight"><pre class="code"><code><span class="hljs-section">mysql&gt; SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tbl b WHERE a.runoob_author = b.runoob_author;
++-------------+-----------------+----------------+</span>
+<span class="hljs-section">| a.runoob_id | a.runoob_author | b.runoob_count |
++-------------+-----------------+----------------+</span>
+| 1           | 菜鸟教程    | 10             |
+| 2           | 菜鸟教程    | 10             |
+| 3           | RUNOOB.COM      | 20             |
+<span class="hljs-section">| 4           | RUNOOB.COM      | 20             |
++-------------+-----------------+----------------+</span>
+4 rows in set (0.01 sec)
+</code></pre></div>
 <h2 id="鉴权">鉴权</h2>
 <p><strong>Passport</strong>是最流行的<strong>node.js</strong>身份验证库<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>详情可以读读它的官方文档<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>还有NestJS中的守卫模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这里就不细说了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
