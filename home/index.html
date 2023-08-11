@@ -79,10 +79,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>How it feels to rest on your patient lips?</p>
-</blockquote>
-
+        
       
     </div>
     <footer class="article-footer">
@@ -429,7 +426,7 @@
       
         <h2 id="前言">前言</h2>
 <p>这篇文档主要记录在生产中遇到的实际问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>由于之前用过Django<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>所以大多地方可能比较简略<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>更详细的内容可以去看<a target="_blank" rel="noopener" href="https://docs.nestjs.cn">Nest中文文档</a><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<h2 id="typescript的知识">TypeScript的知识</h2>
+<h2 id="typescript">TypeScript</h2>
 <h3 id="typescript中的异步">TypeScript中的异步</h3>
 <p>JavaScript语言是一门单线程语言<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>一次只能完成一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>若有多个任务执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>必须按照队列来执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即前一个任务完成以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再执行下一个任务<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>在这种模式下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>只要有一个任务执行消耗了很长时间<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>后面的任务都无法执行<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>常见的浏览器无响应(假死)往往就是因为这样的原因而发生的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>为了解决这个问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>JS将任务执行模式分成同步和异步<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
@@ -623,7 +620,10 @@ res = [x ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</s
 	.execute();
 </code></pre></div>
 <h3 id="联查">联查</h3>
-<p>从SQL的多表查询讲起<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>SELECT查询不但可以</p>
+<p>让我们从MySQL的联查(Join)开始说起<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>联查应用于从<strong>多个数据表</strong>中读取数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>MySQL中的Join可以分为以下三类<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<ul>
+<li>INNER JOIN<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>获取两个表中字段匹配关系的记录</li>
+</ul>
 <h2 id="鉴权">鉴权</h2>
 <p><strong>Passport</strong>是最流行的<strong>node.js</strong>身份验证库<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>详情可以读读它的官方文档<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>还有NestJS中的守卫模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这里就不细说了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
@@ -639,24 +639,25 @@ npm install --save-dev @types/passport-local
 <p>简单来说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>…</p>
 <h2 id="一些记录">一些记录</h2>
 <h3 id="migrate失败">Migrate失败</h3>
+<p>说实话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我也不知道怎么触发这个bug的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <div class="highlight"><pre class="code"><code>export NODE_ENV=cn_test
 yarn migrate
 </code></pre></div>
-<p>然后把不属于我的数据库改动删掉<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>然后再</p>
+<p>然后把不属于这次修改的数据库改动删掉<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再</p>
 <div class="highlight"><pre class="code"><code>yarn execu_migrate
 </code></pre></div>
 <p>就ok了</p>
 <blockquote>
-<p>详情参见项目中cn_test.ts和package.json对migrate脚本的描述</p>
+<p>参见项目中cn_test.ts和package.json对migrate脚本的描述</p>
 </blockquote>
 <h3 id="创建新分支">创建新分支</h3>
-<p>功能都维护在<strong>需求管理文档</strong>里<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>功能维护在<strong>需求管理文档</strong>里<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <div class="highlight"><pre class="code"><code>git checkout &lt;baseline&gt;
 git pull
 git checkout -b &lt;your feature&gt;
 git push -u origin &lt;your feature&gt;
 </code></pre></div>
-<p>然后在这个分支上改就好</p>
+<p>在这个分支上进行你的修改</p>
 <h3 id="arcanist提交方式">Arcanist提交方式</h3>
 <div class="highlight"><pre class="code"><code>git add &lt;file you edited&gt;
 git commit -m &#x27;description message&#x27; /* 注意Commit lint */
