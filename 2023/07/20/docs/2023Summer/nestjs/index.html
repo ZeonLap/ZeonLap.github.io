@@ -140,8 +140,8 @@ foo().then(<span class="hljs-built_in">console</span>.log)
 </ul>
 <p>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="highlight"><pre class="code"><code><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
-arr.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x ** <span class="hljs-number">2</span>);
-<span class="hljs-comment">// arr = [1, 4, 9]</span>
+<span class="hljs-keyword">const</span> res = arr.map(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x ** <span class="hljs-number">2</span>);
+<span class="hljs-comment">// res = [1, 4, 9]</span>
 </code></pre></div>
 <p>另外<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>如果要在map中使用异步函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>需要像下面这样做</p>
 <div class="highlight"><pre class="code"><code><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> <span class="hljs-built_in">Promise</span>.all(
