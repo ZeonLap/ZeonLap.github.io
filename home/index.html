@@ -473,7 +473,47 @@ foo().then(<span class="hljs-built_in">console</span>.log)
 </ul>
 <p>详见<a target="_blank" rel="noopener" href="https://www.lodashjs.com/">lodash官方文档</a></p>
 </blockquote>
-<p>关于Lodash<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span></p>
+<ul>
+<li>引用方法
+<ul>
+<li>全量引用<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><code>import * as _ from lodash;</code></li>
+</ul>
+</li>
+</ul>
+<p>关于Lodash<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们最主要用的还是它关于Array和String的方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>比如说</p>
+<ul>
+<li><code>_.concat(array, [values])</code></li>
+</ul>
+<p>创建一个新数组<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>将<code>array</code>与任何数组 或 值连接在一起<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">let</span> array = [<span class="hljs-number">1</span>];
+<span class="hljs-keyword">let</span> other = _.concat(array, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]);
+<span class="hljs-comment">// other = [1, 2 ,3, 4]</span>
+</code></pre></div>
+<ul>
+<li><code>_.filter(collection, [predicate=_.identity])</code></li>
+</ul>
+<p>遍历 <code>collection</code><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>集合<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>元素<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>返回 <code>predicate</code><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>断言函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>返回真值 的所有元素的数组<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span> predicate<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>断言函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>调用三个参数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><em>(value, index|key, collection)</em><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">var</span> users = [
+  &#123; <span class="hljs-string">&#x27;user&#x27;</span>: <span class="hljs-string">&#x27;barney&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">36</span>, <span class="hljs-string">&#x27;active&#x27;</span>: <span class="hljs-literal">true</span> &#125;,
+  &#123; <span class="hljs-string">&#x27;user&#x27;</span>: <span class="hljs-string">&#x27;fred&#x27;</span>,   <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">40</span>, <span class="hljs-string">&#x27;active&#x27;</span>: <span class="hljs-literal">false</span> &#125;
+];
+ 
+_.filter(users, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">o</span>) </span>&#123; <span class="hljs-keyword">return</span> !o.active; &#125;);
+<span class="hljs-comment">// =&gt; objects for [&#x27;fred&#x27;]</span>
+ 
+<span class="hljs-comment">// The `_.matches` iteratee shorthand.</span>
+_.filter(users, &#123; <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">36</span>, <span class="hljs-string">&#x27;active&#x27;</span>: <span class="hljs-literal">true</span> &#125;);
+<span class="hljs-comment">// =&gt; objects for [&#x27;barney&#x27;]</span>
+ 
+<span class="hljs-comment">// The `_.matchesProperty` iteratee shorthand.</span>
+_.filter(users, [<span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-literal">false</span>]);
+<span class="hljs-comment">// =&gt; objects for [&#x27;fred&#x27;]</span>
+ 
+<span class="hljs-comment">// The `_.property` iteratee shorthand.</span>
+_.filter(users, <span class="hljs-string">&#x27;active&#x27;</span>);
+<span class="hljs-comment">// =&gt; objects for [&#x27;barney&#x27;]</span>
+</code></pre></div>
+<p>还有更多便捷的方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>都可以在文档中看到<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h2 id="nestjs是什么?">NestJS是什么?</h2>
 <ul>
 <li>Nest(NestJS)在Node.js框架之上提高了一个抽象级别<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>提供了一个开箱即用的应用程序架构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>允许开发人员团队创建高度可测试<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>可扩展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span><strong>松耦合</strong>且易于维护的应用程序<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
@@ -590,60 +630,134 @@ foo().then(<span class="hljs-built_in">console</span>.log)
 	.where(<span class="hljs-string">&quot;balabala&quot;</span>, &#123; <span class="hljs-comment">/* whatever */</span> &#125;)
 	.execute();
 </code></pre></div>
+<p>不过<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>实际生产过程中一般使用的是软删除<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>可以看看<code>softRemove</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h3 id="联查">联查</h3>
 <p>让我们从MySQL的联查(Join)开始说起<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>联查应用于从<strong>多个数据表</strong>中读取数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>MySQL中的Join可以分为以下三类<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <ul>
 <li><strong>INNER JOIN</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>获取两个表中字段匹配关系的记录</li>
 </ul>
-<p>举个例子<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>例子来源于<a href="runoob.com">这里</a><span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<div class="highlight"><pre class="code"><code>mysql&gt; use RUNOOB;
+<p>举个例子<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>例子来源于<a href="runoob.com">这里</a><span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>假如我们有这两个表<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>mysql&gt; <span class="hljs-keyword">use</span> RUNOOB;
 Database changed
-<span class="hljs-section">mysql&gt; SELECT * FROM tcount_tbl;
-+---------------+--------------+</span>
-<span class="hljs-section">| runoob_author | runoob_count |
-+---------------+--------------+</span>
+mysql&gt; <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> tcount_tbl;
++<span class="hljs-comment">---------------+--------------+</span>
+| runoob_author | runoob_count |
++<span class="hljs-comment">---------------+--------------+</span>
 | 菜鸟教程  | 10           |
 | RUNOOB.COM    | 20           |
-<span class="hljs-section">| Google        | 22           |
-+---------------+--------------+</span>
-3 rows in set (0.01 sec)
-<span class="hljs-code"> </span>
-<span class="hljs-section">mysql&gt; SELECT * from runoob_tbl;
-+-----------+---------------+---------------+-----------------+</span>
-<span class="hljs-section">| runoob_id | runoob_title  | runoob_author | submission_date |
-+-----------+---------------+---------------+-----------------+</span>
+| Google        | 22           |
++<span class="hljs-comment">---------------+--------------+</span>
+3 rows in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.01</span> sec)
+ 
+mysql&gt; <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">from</span> runoob_tbl;
++<span class="hljs-comment">-----------+---------------+---------------+-----------------+</span>
+| runoob_id | runoob_title  | runoob_author | submission_date |
++<span class="hljs-comment">-----------+---------------+---------------+-----------------+</span>
 | 1         | 学习 PHP    | 菜鸟教程  | 2017-04-12      |
 | 2         | 学习 MySQL  | 菜鸟教程  | 2017-04-12      |
 | 3         | 学习 Java   | RUNOOB.COM    | 2015-05-01      |
 | 4         | 学习 Python | RUNOOB.COM    | 2016-03-06      |
-<span class="hljs-section">| 5         | 学习 C      | FK            | 2017-04-05      |
-+-----------+---------------+---------------+-----------------+</span>
-5 rows in set (0.01 sec)
+| 5         | 学习 C      | FK            | 2017-04-05      |
++<span class="hljs-comment">-----------+---------------+---------------+-----------------+</span>
+5 rows in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.01</span> sec)
 </code></pre></div>
 <p>接下来我们可以使用SQL中的INNER JOIN(也可以省略INNER<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直接用JOIN)来连接以上两张表来读取<strong>runoob_tbl</strong>表中所有<strong>runoob_author</strong>字段在<strong>tcount_tbl</strong>表对应的<strong>runoob_count</strong>字段值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<div class="highlight"><pre class="code"><code><span class="hljs-section">mysql&gt; SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a INNER JOIN tcount_tbl b ON a.runoob_author = b.runoob_author;
-+-------------+-----------------+----------------+</span>
-<span class="hljs-section">| a.runoob_id | a.runoob_author | b.runoob_count |
-+-------------+-----------------+----------------+</span>
+<div class="highlight"><pre class="code"><code>mysql&gt; <span class="hljs-keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="hljs-keyword">FROM</span> runoob_tbl a <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> tcount_tbl b <span class="hljs-keyword">ON</span> a.runoob_author = b.runoob_author;
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+| a.runoob_id | a.runoob_author | b.runoob_count |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
 | 1           | 菜鸟教程    | 10             |
 | 2           | 菜鸟教程    | 10             |
 | 3           | RUNOOB.COM      | 20             |
-<span class="hljs-section">| 4           | RUNOOB.COM      | 20             |
-+-------------+-----------------+----------------+</span>
-4 rows in set (0.00 sec)
+| 4           | RUNOOB.COM      | 20             |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+4 rows in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)
 </code></pre></div>
 <p>这等价于</p>
-<div class="highlight"><pre class="code"><code><span class="hljs-section">mysql&gt; SELECT a.runoob_id, a.runoob_author, b.runoob_count FROM runoob_tbl a, tcount_tbl b WHERE a.runoob_author = b.runoob_author;
-+-------------+-----------------+----------------+</span>
-<span class="hljs-section">| a.runoob_id | a.runoob_author | b.runoob_count |
-+-------------+-----------------+----------------+</span>
+<div class="highlight"><pre class="code"><code>mysql&gt; <span class="hljs-keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="hljs-keyword">FROM</span> runoob_tbl a, tcount_tbl b <span class="hljs-keyword">WHERE</span> a.runoob_author = b.runoob_author;
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+| a.runoob_id | a.runoob_author | b.runoob_count |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
 | 1           | 菜鸟教程    | 10             |
 | 2           | 菜鸟教程    | 10             |
 | 3           | RUNOOB.COM      | 20             |
-<span class="hljs-section">| 4           | RUNOOB.COM      | 20             |
-+-------------+-----------------+----------------+</span>
-4 rows in set (0.01 sec)
+| 4           | RUNOOB.COM      | 20             |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+4 rows in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.01</span> sec)
 </code></pre></div>
+<ul>
+<li><strong>LEFT JOIN<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></strong>LEFT JOIN 会读取左边数据表的全部数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即使右边表无对应数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>例如</li>
+</ul>
+<div class="highlight"><pre class="code"><code>mysql&gt; <span class="hljs-keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="hljs-keyword">FROM</span> runoob_tbl a <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> tcount_tbl b <span class="hljs-keyword">ON</span> a.runoob_author = b.runoob_author;
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+| a.runoob_id | a.runoob_author | b.runoob_count |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+| 1           | 菜鸟教程    | 10             |
+| 2           | 菜鸟教程    | 10             |
+| 3           | RUNOOB.COM      | 20             |
+| 4           | RUNOOB.COM      | 20             |
+| 5           | FK              | NULL           |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+5 rows in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.01</span> sec)
+</code></pre></div>
+<ul>
+<li><strong>RIGHT JOIN<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></strong>与LEFT JOIN正好相反<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>RIGHT JOIN 会读取右边数据表的全部数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即使左边边表无对应数据<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+<p>需要理解一下这个例子<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>mysql&gt; <span class="hljs-keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="hljs-keyword">FROM</span> runoob_tbl a <span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">JOIN</span> tcount_tbl b <span class="hljs-keyword">ON</span> a.runoob_author = b.runoob_author;
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+| a.runoob_id | a.runoob_author | b.runoob_count |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+| 1           | 菜鸟教程    | 10             |
+| 2           | 菜鸟教程    | 10             |
+| 3           | RUNOOB.COM      | 20             |
+| 4           | RUNOOB.COM      | 20             |
+| NULL        | NULL            | 22             |
++<span class="hljs-comment">-------------+-----------------+----------------+</span>
+5 rows in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.01</span> sec)
+</code></pre></div>
+<ul>
+<li><strong>TypeORM中使用联查</strong></li>
+</ul>
+<p>假设有以下的实体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">import</span> &#123; Entity, PrimaryGeneratedColumn, Column, OneToMany &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;typeorm&quot;</span>;
+<span class="hljs-keyword">import</span> &#123; Photo &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./Photo&quot;</span>;
+
+<span class="hljs-meta">@Entity</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+  <span class="hljs-meta">@PrimaryGeneratedColumn</span>()
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-meta">@Column</span>()
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
+
+  <span class="hljs-meta">@OneToMany</span>(<span class="hljs-function"><span class="hljs-params">type</span> =&gt;</span> Photo, <span class="hljs-function"><span class="hljs-params">photo</span> =&gt;</span> photo.user)
+  <span class="hljs-attr">photos</span>: Photo[];
+&#125;
+</code></pre></div>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">import</span> &#123; Entity, PrimaryGeneratedColumn, Column, ManyToOne &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;typeorm&quot;</span>;
+<span class="hljs-keyword">import</span> &#123; User &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./User&quot;</span>;
+
+<span class="hljs-meta">@Entity</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Photo</span> </span>&#123;
+  <span class="hljs-meta">@PrimaryGeneratedColumn</span>()
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-meta">@Column</span>()
+  <span class="hljs-attr">url</span>: <span class="hljs-built_in">string</span>;
+
+  <span class="hljs-meta">@ManyToOne</span>(<span class="hljs-function"><span class="hljs-params">type</span> =&gt;</span> User, <span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.photos)
+  <span class="hljs-attr">user</span>: User;
+&#125;
+</code></pre></div>
+<p>现在我们要在查询<code>User</code>表的时候<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>同时获取/筛选它的<code>photos</code>信息<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>那么我们可以这么做<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code><span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> createQueryBuilder(<span class="hljs-string">&quot;user&quot;</span>)
+  .leftJoinAndSelect(<span class="hljs-string">&quot;user.photos&quot;</span>, <span class="hljs-string">&quot;photo&quot;</span>)
+  .where(<span class="hljs-comment">/* Some Conditions on photos */</span>)
+  .getMany();
+</code></pre></div>
+<p>可以和Django ORM处理外键的方式进行对比<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>需要注意的是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在表中数据庞大的情况下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><strong>最好尽可能地先进行条件筛选<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再进行联查</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>不然联查的过程中可能会连接一个非常庞大的表<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这会导致效率严重下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h2 id="鉴权">鉴权</h2>
 <p><strong>Passport</strong>是最流行的<strong>node.js</strong>身份验证库<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>详情可以读读它的官方文档<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>还有NestJS中的守卫模块<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这里就不细说了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
@@ -691,6 +805,28 @@ git checkout &lt;dest&gt;
 git merge --no-ff &lt;src&gt;
 git push
 </code></pre></div>
+<h3 id="sql慢查询">SQL慢查询</h3>
+<p>生产过程中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在Mentor的带领下也解决了几个慢查询的问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>大概有这么几个<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<ul>
+<li>
+<p>前文提到的联查<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>数据量庞大时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><strong>先尽可能地进行条件筛选<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>再进行联查<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></strong></p>
+</li>
+<li>
+<p><code>getMany()</code>和<code>getCount()</code>的效率差异是巨大的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>所以如果某个功能只要求计数的话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>最好不要<code>getMany()</code>再筛选<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><strong>宁愿多几条筛选的SQL语句</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+</li>
+<li>
+<p>关于SQL中的<code>like</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在数据量不大的时候还是挺好用的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>但是数据量庞大的时候<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>最好还是建立索引<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>使用</p>
+</li>
+</ul>
+<div class="highlight"><pre class="code"><code>MATCH (column) AGAINST (pattern in BOOLEAN MODE);
+</code></pre></div>
+<ul>
+<li><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>网上看见的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不知真假<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>最好不要使用<code>or</code>进行查询<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>如果<strong>可以</strong>的话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>使用<code>union</code>连接两次查询的结果<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>
+<ul>
+<li>然而TypeORM的QueryBuilder并不支持<code>union</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>所以只能使用<code>or</code>和<code>orwhere</code>了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
