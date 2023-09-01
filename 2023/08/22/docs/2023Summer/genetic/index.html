@@ -7,15 +7,15 @@
   <title>组合优化问题：遗传算法 | Let the voice of love take you higher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="description" content="
-Credit to 马少平老师
+  <meta name="description" content="遗传算法
+术语解释
 
 遗传算法
 步骤：
 (1) 给定群体规模N，交叉概率$P_c$和变异概率$P_m$，t=0；
 (2) 随机生成N个个体作为初始群体；
 (3) 对于群体中的每一个个体$x_i(i=1, 2, \dots, N)$分别计算其适应值$F(x_i)$；
-(4) 如果算法满足">
+(4) 如果算法满足停止准则，则转">
   
   
   
@@ -85,10 +85,10 @@ Credit to 马少平老师
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>Credit to <strong>马少平</strong>老师</p>
-</blockquote>
-<h2 id="遗传算法">遗传算法</h2>
+        <h2 id="遗传算法">遗传算法</h2>
+<h3 id="术语解释">术语解释</h3>
+<p><img src="/2023/08/22/docs/2023Summer/genetic/1.jpg" alt></p>
+<h3 id="遗传算法-1">遗传算法</h3>
 <p>步骤<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <p>(1) 给定群体规模N<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>交叉概率<span class="markdown-them-math-inline">$P_c$</span>和变异概率<span class="markdown-them-math-inline">$P_m$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>t=0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(2) 随机生成N个个体作为初始群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
@@ -123,7 +123,38 @@ $$</div><ul>
 <ul>
 <li><strong>选择操作</strong></li>
 </ul>
-
+<p>设<span class="markdown-them-math-inline">$x_i(i=1, \dots, N)$</span>是<span class="markdown-them-math-inline">$N$</span>个可能的解<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>组成规模为<span class="markdown-them-math-inline">$N$</span>的群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$F(x_i)$</span>为解<span class="markdown-them-math-inline">$x_i$</span>的适应值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>选择操作就从群体中<strong>可重复地</strong>选择<span class="markdown-them-math-inline">$N$</span>个解形成种群<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>选择操作的基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>适应值越大的解被选中的概率越大<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>选择概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$P(x_i)=\frac{F(x_i)}{\sum_{j=1}^NF(x_j)}
+$$</div><ul>
+<li><span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>轮盘赌<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>选择算法</li>
+</ul>
+<p>(1)<span class="markdown-them-math-inline">$ r = random(0, 1)$</span><em><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>均匀分布<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></em>,<span class="markdown-them-math-inline">$ s = 0, i = 0$</span>;</p>
+<p>(2) 如果<span class="markdown-them-math-inline">$s &gt; r$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则转(4);</p>
+<p>(3)<span class="markdown-them-math-inline">$ i = i + 1, s = s + p(x_i)$</span>, 转(2);</p>
+<p>(4) <span class="markdown-them-math-inline">$x_i$</span>即为被选中的染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>输出<span class="markdown-them-math-inline">$i$</span>;</p>
+<p>(5) 结束<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>假设生成的随机数分别为<span class="markdown-them-math-inline">$0.1, 0.3, 0.5, 0.8$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<p><img src="/2023/08/22/docs/2023Summer/genetic/2.jpg" alt></p>
+<ul>
+<li><span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>确定性<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>选择算法</li>
+</ul>
+<p>对于规模为<span class="markdown-them-math-inline">$N$</span>的群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>选择概率为<span class="markdown-them-math-inline">$P(x_i)$</span>的个体<span class="markdown-them-math-inline">$x_i$</span>被选中次数的<strong>期望</strong><span class="markdown-them-math-inline">$e(x_i)$</span>为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$e(x_i)=P(x_i)N
+$$</div><p>对于群体中的每一个<span class="markdown-them-math-inline">$x_i$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>首先选择<span class="markdown-them-math-inline">$\lfloor e(x_i)\rfloor$</span>次<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>共得到<span class="markdown-them-math-inline">$\sum_{i=1}^N\lfloor e(x_i)\rfloor$</span>个个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span></p>
+<p>然后按照<span class="markdown-them-math-inline">$e(x_i)-\lfloor e(x_i)\rfloor$</span>从<strong>大到小对染色体排序</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>依次取出<span class="markdown-them-math-inline">$N - \sum_{i=1}^N\lfloor e(x_i)\rfloor$</span>个个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这样就得到了<span class="markdown-them-math-inline">$N$</span>个染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><img src="/2023/08/22/docs/2023Summer/genetic/3.png" alt></p>
+<ul>
+<li><strong>交叉操作</strong></li>
+</ul>
+<p>交叉操作常用于通过两个双亲产生后代<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>设<span class="markdown-them-math-inline">$a, b$</span>是两个进行交叉操作的双亲染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$a = a_1a_2a_3\dots a_ia_{i+1}\dots a_n
+$$</div><div class="markdown-them-math-block">$$b = b_1b_2b_3\dots b_ib_{i+1}\dots b_n
+$$</div><p>其中<span class="markdown-them-math-inline">$a[i+1,n], b[i+1,n]$</span>为交叉位<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>那么进行一次<strong>交叉操作</strong>以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者变为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$a = a_1a_2a_3\dots a_ib_{i+1}\dots b_n
+$$</div><div class="markdown-them-math-block">$$b = b_1b_2b_3\dots b_ia_{i+1}\dots a_n
+$$</div>
       
     </div>
     <footer class="article-footer">
