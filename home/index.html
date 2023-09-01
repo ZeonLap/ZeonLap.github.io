@@ -428,11 +428,60 @@
       
         <h2 id="遗传算法">遗传算法</h2>
 <h3 id="术语解释">术语解释</h3>
-<p><img src="/2023/08/22/docs/2023Summer/genetic/1.jpg" alt></p>
+<table>
+<thead>
+<tr>
+<th>生物进化中的概念</th>
+<th>遗传算法中的应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>环境</td>
+<td>适应函数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>与求解的问题有关的函数</td>
+</tr>
+<tr>
+<td>适应性</td>
+<td>适应函数值<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>适应值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></td>
+</tr>
+<tr>
+<td>选择<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>适者生存</td>
+<td>以适应值的大小决定生存的概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>适应函数值大的解生存下来的概率大<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>适应函数值小的解生存下来的概率小</td>
+</tr>
+<tr>
+<td>个体</td>
+<td>问题的一个解</td>
+</tr>
+<tr>
+<td>染色体</td>
+<td>解的编码</td>
+</tr>
+<tr>
+<td>基因</td>
+<td>组成编码的元素</td>
+</tr>
+<tr>
+<td>群体</td>
+<td>被选定的一组解<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>以编码形式表示<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></td>
+</tr>
+<tr>
+<td>种群</td>
+<td>根据适应函数选择的一组解<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>以编码形式表示<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></td>
+</tr>
+<tr>
+<td>婚配</td>
+<td>以一定的方式由双亲产生后代的过程<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在遗传算法中称作交叉操作</td>
+</tr>
+<tr>
+<td>变异</td>
+<td>编码的某些基因分量发生变化的过程</td>
+</tr>
+</tbody>
+</table>
 <h3 id="遗传算法-1">遗传算法</h3>
 <p>步骤<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<p>(1) 给定群体规模N<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>交叉概率<span class="markdown-them-math-inline">$P_c$</span>和变异概率<span class="markdown-them-math-inline">$P_m$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>t=0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
-<p>(2) 随机生成N个个体作为初始群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
+<p>(1) 给定群体规模<span class="markdown-them-math-inline">$N$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>交叉概率<span class="markdown-them-math-inline">$P_c$</span>和变异概率<span class="markdown-them-math-inline">$P_m$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>t=0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
+<p>(2) 随机生成<span class="markdown-them-math-inline">$N$</span>个个体作为初始群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(3) 对于群体中的每一个个体<span class="markdown-them-math-inline">$x_i(i=1, 2, \dots, N)$</span>分别计算其适应值<span class="markdown-them-math-inline">$F(x_i)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(4) 如果算法满足停止准则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则转(10)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(5) 对群体中的每一个体<span class="markdown-them-math-inline">$x_i$</span>依下式计算其选择概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
@@ -441,7 +490,7 @@ $$</div><p>(6) 依据选择概率<span class="bd-box"><h-char class="bd bd-beg">
 <p>(7) 依据交叉概率<span class="markdown-them-math-inline">$P_c$</span>从种群中随机选择两个个体作为双亲进行交叉操作<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其两个后代进入新的群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>种群中未进行交叉操作的个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直接复制到新群体中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(8) 依据变异概率<span class="markdown-them-math-inline">$P_m$</span>从新群体中选择个体进行变异操作<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>用变异后的个体代替新群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(9) 用新群体代替旧群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$t=t+1$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>转(3)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
-<p>(10) <strong>进化过程中适应值最大的个体</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>作为算法得到的最优解输出<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
+<p>(10) <em><strong>进化过程中适应值最大的个体</strong></em><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>作为算法得到的最优解输出<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span><em><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>注意这里是选择整个过程中适应值最大的个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而非最后一代中适应值最大的个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></em></p>
 <p>(11) 结束<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h3 id="一个例子">一个例子</h3>
 <blockquote>
@@ -460,14 +509,15 @@ $$</div><ul>
 <p>对可能的<strong>解</strong>进行<strong>编码</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>以便于可以用遗传算法求解<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>二进制编码</strong>是一种常用的编码方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>该例中<span class="markdown-them-math-inline">$x$</span>取值范围为<span class="markdown-them-math-inline">$[0, 31]$</span>间的整数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>刚好可以用5位二进制表示<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>因此可以用5位二进制表示该问题的解<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>即染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><code>00000</code>表示<span class="markdown-them-math-inline">$0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>11111</code>表示<span class="markdown-them-math-inline">$31$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>要求<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>一一对应<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><code>00000</code>表示<span class="markdown-them-math-inline">$0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>11111</code>表示<span class="markdown-them-math-inline">$31$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>编码选择的一个要求是<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><strong>一一对应</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
 <li><strong>选择操作</strong></li>
 </ul>
 <p>设<span class="markdown-them-math-inline">$x_i(i=1, \dots, N)$</span>是<span class="markdown-them-math-inline">$N$</span>个可能的解<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>组成规模为<span class="markdown-them-math-inline">$N$</span>的群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$F(x_i)$</span>为解<span class="markdown-them-math-inline">$x_i$</span>的适应值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>选择操作就从群体中<strong>可重复地</strong>选择<span class="markdown-them-math-inline">$N$</span>个解形成种群<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>选择操作的基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>适应值越大的解被选中的概率越大<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>选择概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$P(x_i)=\frac{F(x_i)}{\sum_{j=1}^NF(x_j)}
-$$</div><ul>
+$$</div><p>在实现过程中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>有两种常用的选择算法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<ul>
 <li><span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>轮盘赌<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>选择算法</li>
 </ul>
 <p>(1)<span class="markdown-them-math-inline">$ r = random(0, 1)$</span><em><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>均匀分布<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></em>,<span class="markdown-them-math-inline">$ s = 0, i = 0$</span>;</p>
@@ -475,8 +525,6 @@ $$</div><ul>
 <p>(3)<span class="markdown-them-math-inline">$ i = i + 1, s = s + p(x_i)$</span>, 转(2);</p>
 <p>(4) <span class="markdown-them-math-inline">$x_i$</span>即为被选中的染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>输出<span class="markdown-them-math-inline">$i$</span>;</p>
 <p>(5) 结束<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p>假设生成的随机数分别为<span class="markdown-them-math-inline">$0.1, 0.3, 0.5, 0.8$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<p><img src="/2023/08/22/docs/2023Summer/genetic/2.jpg" alt></p>
 <ul>
 <li><span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>确定性<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>选择算法</li>
 </ul>
@@ -484,17 +532,35 @@ $$</div><ul>
 <div class="markdown-them-math-block">$$e(x_i)=P(x_i)N
 $$</div><p>对于群体中的每一个<span class="markdown-them-math-inline">$x_i$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>首先选择<span class="markdown-them-math-inline">$\lfloor e(x_i)\rfloor$</span>次<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>共得到<span class="markdown-them-math-inline">$\sum_{i=1}^N\lfloor e(x_i)\rfloor$</span>个个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span></p>
 <p>然后按照<span class="markdown-them-math-inline">$e(x_i)-\lfloor e(x_i)\rfloor$</span>从<strong>大到小对染色体排序</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>依次取出<span class="markdown-them-math-inline">$N - \sum_{i=1}^N\lfloor e(x_i)\rfloor$</span>个个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这样就得到了<span class="markdown-them-math-inline">$N$</span>个染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><img src="/2023/08/22/docs/2023Summer/genetic/3.png" alt></p>
+<p><span class="bd-box"><h-char class="bd bd-end"><h-inner>“</h-inner></h-char></span>确定性<span class="bd-box"><h-char class="bd bd-beg"><h-inner>”</h-inner></h-char></span>选择算法没有随机性<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>每个个体被选择的次数是一定的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <ul>
 <li><strong>交叉操作</strong></li>
 </ul>
-<p>交叉操作常用于通过两个双亲产生后代<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>交叉操作常用于<strong>两个双亲</strong>产生后代的过程<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>设<span class="markdown-them-math-inline">$a, b$</span>是两个进行交叉操作的双亲染色体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$a = a_1a_2a_3\dots a_ia_{i+1}\dots a_n
 $$</div><div class="markdown-them-math-block">$$b = b_1b_2b_3\dots b_ib_{i+1}\dots b_n
-$$</div><p>其中<span class="markdown-them-math-inline">$a[i+1,n], b[i+1,n]$</span>为交叉位<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>那么进行一次<strong>交叉操作</strong>以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者变为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+$$</div><p>其中<span class="markdown-them-math-inline">$a[i+1,n], b[i+1,n]$</span>为交叉位<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>那么进行一次<strong>交叉操作</strong>以后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>二者的后代为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$a = a_1a_2a_3\dots a_ib_{i+1}\dots b_n
 $$</div><div class="markdown-them-math-block">$$b = b_1b_2b_3\dots b_ia_{i+1}\dots a_n
+$$</div><ul>
+<li><strong>变异操作</strong></li>
+</ul>
+<p>在二进制编码中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>变异的基因由<span class="markdown-them-math-inline">$0$</span>变成<span class="markdown-them-math-inline">$1$</span>或者由<span class="markdown-them-math-inline">$1$</span>变成<span class="markdown-them-math-inline">$0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h3 id="进阶话题">进阶话题</h3>
+<ul>
+<li><strong>编码问题</strong></li>
+</ul>
+<p>采用什么样的编码与具体问题有关<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>同时还要考虑表示精度以及<strong>如何进行交叉</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span><strong>变异操作</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>例如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>若<span class="markdown-them-math-inline">$x$</span>的取值为<span class="markdown-them-math-inline">$[0, 31]$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>精度可以有多个选择<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>编码长度与精度之间的关系<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></strong></p>
+<p>编码长度<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$n$</span></p>
+<p>取值范围<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$[a, b]$</span></p>
+<p><span class="markdown-them-math-inline">$n$</span>位二进制数可以表示<span class="markdown-them-math-inline">$0$</span>到<span class="markdown-them-math-inline">$2^n-1$</span>共<span class="markdown-them-math-inline">$2^n$</span>个数</p>
+<p>若以<span class="markdown-them-math-inline">$\epsilon$</span>表示允许的表示误差<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>那么一定有</p>
+<div class="markdown-them-math-block">$$\frac{b-a}{2^n-1} \leq \epsilon
+$$</div><p>故</p>
+<div class="markdown-them-math-block">$$n \ge \log_2(\frac{b-a}{\epsilon}+1)
 $$</div>
       
     </div>
