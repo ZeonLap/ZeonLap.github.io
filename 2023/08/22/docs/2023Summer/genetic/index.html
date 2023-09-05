@@ -7,8 +7,7 @@
   <title>组合优化问题：遗传算法 | Let the voice of love take you higher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="description" content="遗传算法
-术语解释
+  <meta name="description" content="术语解释
 
 
 
@@ -35,7 +34,9 @@
 
 
 染色体
-解">
+解的编码
+
+">
   
   
   
@@ -105,8 +106,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="遗传算法">遗传算法</h2>
-<h3 id="术语解释">术语解释</h3>
+        <h2 id="术语解释">术语解释</h2>
 <table>
 <thead>
 <tr>
@@ -157,7 +157,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="遗传算法-1">遗传算法</h3>
+<h2 id="遗传算法">遗传算法</h2>
 <p>步骤<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <p>(1) 给定群体规模<span class="markdown-them-math-inline">$N$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>交叉概率<span class="markdown-them-math-inline">$P_c$</span>和变异概率<span class="markdown-them-math-inline">$P_m$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>t=0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(2) 随机生成<span class="markdown-them-math-inline">$N$</span>个个体作为初始群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
@@ -171,7 +171,7 @@ $$</div><p>(6) 依据选择概率<span class="bd-box"><h-char class="bd bd-beg">
 <p>(9) 用新群体代替旧群体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$t=t+1$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>转(3)<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
 <p>(10) <em><strong>进化过程中适应值最大的个体</strong></em><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>作为算法得到的最优解输出<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span><em><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>注意这里是选择整个过程中适应值最大的个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而非最后一代中适应值最大的个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></em></p>
 <p>(11) 结束<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<h3 id="一个例子">一个例子</h3>
+<h2 id="一个例子">一个例子</h2>
 <blockquote>
 <p>求解下列函数的最大值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其中<span class="markdown-them-math-inline">$x$</span>取值为区间<span class="markdown-them-math-inline">$[0, 31]$</span>上的整数</p>
 <div class="markdown-them-math-block">$$f(x)=x^2
@@ -228,7 +228,7 @@ $$</div><ul>
 <li><strong>变异操作</strong></li>
 </ul>
 <p>在二进制编码中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>变异的基因由<span class="markdown-them-math-inline">$0$</span>变成<span class="markdown-them-math-inline">$1$</span>或者由<span class="markdown-them-math-inline">$1$</span>变成<span class="markdown-them-math-inline">$0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<h3 id="进阶话题">进阶话题</h3>
+<h2 id="进阶话题">进阶话题</h2>
 <ul>
 <li><strong>编码问题</strong></li>
 </ul>
@@ -242,7 +242,7 @@ $$</div><ul>
 <div class="markdown-them-math-block">$$\frac{b-a}{2^n-1} \leq \epsilon
 $$</div><p>故</p>
 <div class="markdown-them-math-block">$$n \ge \log_2(\frac{b-a}{\epsilon}+1)
-$$</div><div class="markdown-them-math-block">$$$$</div>
+$$</div>
       
     </div>
     <footer class="article-footer">
