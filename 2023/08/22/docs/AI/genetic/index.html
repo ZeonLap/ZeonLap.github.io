@@ -79,7 +79,7 @@
 </div>
 
       <div id="content" class="outer">
-        <section id="main"><article id="default-docs/2023Summer/genetic" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="default-docs/AI/genetic" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="" class="article-date">
   <time class="dt-published" datetime="2023-08-21T16:00:00.000Z" itemprop="datePublished">2023-08-22</time>
@@ -242,7 +242,16 @@ $$</div><ul>
 <div class="markdown-them-math-block">$$\frac{b-a}{2^n-1} \leq \epsilon
 $$</div><p>故</p>
 <div class="markdown-them-math-block">$$n \ge \log_2(\frac{b-a}{\epsilon}+1)
-$$</div>
+$$</div><p><strong>编码与取值的对应关系</strong></p>
+<div class="markdown-them-math-block">$$x_i = a + i \times\frac{b-a}{2^n-1}
+$$</div><p>即<span class="markdown-them-math-inline">$x_0, x_1, \dots, x_{2^n-1}$</span>的编码分别为<span class="markdown-them-math-inline">$00\dots00, 00\dots01, \dots, 11\dots11$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>例<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></strong><span class="markdown-them-math-inline">$x$</span>取值范围为<span class="markdown-them-math-inline">$[0, 31]$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>精度<span class="markdown-them-math-inline">$\epsilon=0.5$</span></p>
+<div class="markdown-them-math-block">$$n \ge \log_2(\frac{b-a}{\epsilon} + 1) \approx 5.98 \rightarrow 6
+$$</div><div class="markdown-them-math-block">$$x_i = i \times \frac{31}{63} = 0, 0.49, 0.98, 1.47, ..., 30.51, 31
+$$</div><p>然而我们要求的精度是<span class="markdown-them-math-inline">$0.5$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这是怎么回事呢<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span></p>
+<p>如果严格要求间隔为<span class="markdown-them-math-inline">$0.5$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>那么<span class="markdown-them-math-inline">$x_i = 0 + i\times0.5$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>也就是说编码<code>000000</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>000001</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>000010</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>…<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>111110</code>对应<span class="markdown-them-math-inline">$0, 0.5, 1, 1.5, \dots, 31$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而<code>111111</code>对应<span class="markdown-them-math-inline">$31.5$</span><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>多余的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>这时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>我们可以令<code>111111</code>的<strong>适应值为<span class="markdown-them-math-inline">$0$</span></strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在下一代选择中被淘汰<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>或者在交叉<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>变异操作中一出现<code>111111</code>就将其删除<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>并补充一个<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+
       
     </div>
     <footer class="article-footer">
@@ -265,7 +274,7 @@ $$</div>
     </a>
   
   
-    <a href="../../../../../07/20/docs/2023Summer/nestjs/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../../../../../07/20/docs/SE/nestjs/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">
         
@@ -302,7 +311,7 @@ $$</div>
           </li>
         
           <li>
-            <a href="../../../../../07/20/docs/2023Summer/nestjs/">NestJS</a>
+            <a href="../../../../../07/20/docs/SE/nestjs/">NestJS</a>
           </li>
         
           <li>
