@@ -291,7 +291,7 @@ $$</div><p>然而我们要求的精度是<span class="markdown-them-math-inline"
 <p>遗传算法求解适应函数的最大值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$\geq0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>有两种构造方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$F(x)=
 \begin{cases}
-f(x), &amp; f(x)\textgreater0\\
+f(x), &amp; f(x) &gt; 0\\
 0, &amp; Others
 \end{cases}
 $$</div><p>或</p>
@@ -325,7 +325,7 @@ $$</div><ol start="2">
 $$</div><p>原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <p>适应函数与指标函数在群体内的平均值相等.</p>
 <p>群体内最大的适应函数值是群体内指标函数平均值的<span class="markdown-them-math-inline">$M$</span>倍<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其中<span class="markdown-them-math-inline">$M$</span>是一个比较大的常数.</p>
-<p><img src="/2023/08/22/docs/AI/genetic/wangjuanli/Codefield/Blog/LTNSXD/source/_posts/docs/AI/genetic/image-20230910112220114.png" alt="image-20230910112220114"></p>
+<p><img src="/2023/08/22/docs/AI/genetic/1.png" alt></p>
 <p>于是有</p>
 <div class="markdown-them-math-block">$$\alpha \frac{\sum_{i=1}^N f(x_i)}{N} + \beta = \frac{\sum_{i=1}^Nf(x_i)}{N}
 $$</div><div class="markdown-them-math-block">$$\alpha \max_{1\le i \le N}f(x_i) + \beta = M \frac{\sum_{i=1}^Nf(x_i)}{N}
