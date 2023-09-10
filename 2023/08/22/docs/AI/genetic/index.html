@@ -257,33 +257,33 @@ $$</div><p>然而我们要求的精度是<span class="markdown-them-math-inline"
 <p><strong>旅行商问题</strong></p>
 <p>4个城市<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>A<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>B<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>C<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>D为城市名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>1<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>2<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>3<span class="bd-box"><h-char class="bd bd-beg"><h-inner>、</h-inner></h-char></span>4为行走顺序<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这时可以采用二进制编码以外的编码方式进行编码<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>例如<strong>整数编码</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <p>从1到n给每个城市唯一的整数编号<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>这组整数任意一个排列代表了旅行商问题的一个可能解<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>例如<code>21435</code><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>二进制编码的交叉操作</strong></p>
+<p><strong>1. 二进制编码的交叉操作</strong></p>
 <p><strong>双亲双子法</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>和前文所述的一致<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>两个双亲生成新后代中的两个个体<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>多交叉位法</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>有多个交叉位的双亲双子法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>整数编码的交叉操作</strong></p>
+<p><strong>2. 整数编码的交叉操作</strong></p>
 <p>双亲1: <code>1234|5678</code>(<code>|</code>代表交叉位的分割)</p>
 <p>双亲2: <code>5217|3846</code></p>
 <p>后代1: <code>1234|5786</code></p>
 <p>后代2: <code>5217|3468</code></p>
 <p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>交叉位后面的编码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>是<strong>依照缺少的城市<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在另一个双亲中的排列顺序</strong>决定的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>多交叉位是类似的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>复制一段编码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>缺少的城市依据另一个双亲复制<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>基于次序的交叉法</strong></p>
+<p><strong>3. 基于次序的交叉法</strong></p>
 <p>双亲1: <code>1 2 3 4 5 6 7 8 9 10</code></p>
 <p>双亲2: <code>5 9 2 4 6 1 10 7 3 8</code></p>
 <p>譬如<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>选定位置对应的双亲1的2<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>3<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>5<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>8<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>然后找到双亲2的这几个数字</p>
 <p>双亲2: <code>b 9 b 4 6 1 10 7 b b</code></p>
 <p>按照双亲1的顺序<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>2<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>3<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>5<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>8<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>填入<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <p>后代1: <code>2 9 3 4 6 1 10 7 5 8</code></p>
-<p><strong>基于位置的交叉法</strong></p>
+<p><strong>4. 基于位置的交叉法</strong></p>
 <p>一样的</p>
 <ul>
 <li><strong>变异规则</strong></li>
 </ul>
-<p><strong>基于位置的变异</strong></p>
+<p><strong>1. 基于位置的变异</strong></p>
 <p><code>2 1 3 6 4 5 7</code> -&gt; <code>2 4 1 3 6 5 7</code><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>4放到1之前<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></p>
-<p><strong>基于次序的变异</strong></p>
+<p><strong>2. 基于次序的变异</strong></p>
 <p>交换</p>
-<p><strong>打乱变异</strong></p>
+<p><strong>3. 打乱变异</strong></p>
 <p>变异位之间的基因进行<code>random_suffle</code></p>
 <ul>
 <li><strong>适应函数</strong></li>
@@ -303,9 +303,7 @@ f(x) + M, &amp; f(x) + M &gt; 0 \\
 $$</div><p>其中<span class="markdown-them-math-inline">$M&gt;0$</span>为常数<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>超参数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></p>
 <p>若要求最小值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>可以求<span class="markdown-them-math-inline">$F(x)=M-f(x)$</span>的最大值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$M$</span>是超参数</p>
 <p><strong>加速的思想</strong></p>
-<ol>
-<li><strong>非线性加速</strong></li>
-</ol>
+<p><strong>1. 非线性加速</strong></p>
 <div class="markdown-them-math-block">$$F(x) =
 \begin{cases}
 \frac{1}{f_{max}-f(x)}, &amp; f(x) &lt; f_{max}\\
@@ -318,9 +316,7 @@ $$</div><p>其中<span class="markdown-them-math-inline">$f_{max}$</span>为当�
 \frac{1}{f(x)-f_{min}}, &amp; f(x) &gt; f_{min}\\
 M, &amp; Others
 \end{cases}
-$$</div><ol start="2">
-<li><strong>线性加速</strong></li>
-</ol>
+$$</div><p><strong>2. 线性加速</strong></p>
 <div class="markdown-them-math-block">$$F(x) = \alpha f(x) + \beta
 $$</div><p>原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <p>适应函数与指标函数在群体内的平均值相等.</p>
