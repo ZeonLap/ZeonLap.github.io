@@ -641,13 +641,23 @@ $$</div><p>原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-
 <p>于是有</p>
 <div class="markdown-them-math-block">$$\alpha \frac{\sum_{i=1}^N f(x_i)}{N} + \beta = \frac{\sum_{i=1}^Nf(x_i)}{N}
 $$</div><div class="markdown-them-math-block">$$\alpha \max_{1\le i \le N}f(x_i) + \beta = M \frac{\sum_{i=1}^Nf(x_i)}{N}
-$$</div><ol start="3">
-<li><strong>基于排序的适应函数</strong></li>
-</ol>
+$$</div><p><strong>3. 基于排序的适应函数</strong></p>
 <p>第<span class="markdown-them-math-inline">$i$</span>位个体的适应值直接设为<span class="markdown-them-math-inline">$i$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>选中概率为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$P(x_i) = \frac{i}{\sum i} = \frac{2i}{N(N+1)}
 $$</div><p>和适应函数的绝对大小无关<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>只和次序有关<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-
+<ul>
+<li><strong>遗传算法的停止准则</strong></li>
+</ul>
+<p>通过观测一些量的变化情况<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>判断算法是否可以停止了</p>
+<p><strong>1. 当前最好法</strong></p>
+<p>目前为止得到的最好结果的变化情况</p>
+<p><strong>2. 在线比较法</strong></p>
+<p>每一代平均值的变化</p>
+<div class="markdown-them-math-block">$$v_{online}=\frac{1}{N}\sum_{i=1}^Nf(x_i)
+$$</div><p><strong>3. 离线比较法</strong></p>
+<p>每一代最好结果的平均值的变化</p>
+<div class="markdown-them-math-block">$$v_{offline}=\frac{1}{T}\sum_{t=1}^Tf^*(t)
+$$</div>
       
     </div>
     <footer class="article-footer">
