@@ -338,6 +338,182 @@
 
 
   
+    <article id="default-docs/AI/annealing" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="../2023/08/22/docs/AI/annealing/" class="article-date">
+  <time class="dt-published" datetime="2023-08-21T16:00:00.000Z" itemprop="datePublished">2023-08-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="../categories/%E6%96%87%E6%A1%A3/">文档</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="../2023/08/22/docs/AI/annealing/">组合优化问题：退火算法</a>
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="退火过程">退火过程</h2>
+<ul>
+<li>
+<p>升温<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>随着温度的不断上升<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子<strong>逐渐脱离其平衡位置<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>变得越来越自由</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直到达到固体的溶解温度<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子排列从原来的有序状态变为完全的无序状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+</li>
+<li>
+<p>退火<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>随着温度的下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子的热运动逐渐减弱<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子逐渐停留在不同的状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其排列也从无序向有序方向发展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直至到温度很低时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>重新以一定的结构排列<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+</li>
+<li>
+<p>粒子不同的排列结构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>对应着不同的内能水平<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>如果退火过程是缓慢进行的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>温度的下降如果非常缓慢的话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>使得在每个温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子的排列都达到一种平衡态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则当温度趋于绝对零度时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统的内能将趋于最小值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+</li>
+</ul>
+<h3 id="metropolis准则">Metropolis准则</h3>
+<p>从状态i转换为状态j的转换准则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<p>如果<span class="markdown-them-math-inline">$E(j)\leq E(i)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则状态转换被接受<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
+<p>如果<span class="markdown-them-math-inline">$E(j)&gt;E(i)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则状态转移被接受的概率为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$\exp(\frac{E(i)-E(j)}{kT})$</span></p>
+<blockquote>
+<p>Boltzmann分布律<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$P_i(T)=\frac{e^{-\frac{E(i)}{kT}}}{Z_T}$</span></p>
+</blockquote>
+<h3 id="退火过程分析">退火过程分析</h3>
+<p><strong>1. 同一温度下两个内能不同的状态</strong></p>
+<p>假设<span class="markdown-them-math-inline">$E(i)&lt;E(j)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>那么<span class="markdown-them-math-inline">$P_i(T)-P_j(T)&gt;0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>也即在任何温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统<strong>处于低内能状态的概率大于处于高内能状态的概率</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>2.高温下的情况</strong></p>
+<div class="markdown-them-math-block">$$\lim_{T\rightarrow\infin}P_i(T)=\lim_{T\rightarrow\infin}\frac{\exp(-\frac{E(i)}{kT})}{\sum_{j\in S}\exp(-\frac{E(j)}{kT})} = \frac{1}{\left| S\right|}
+$$</div><p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>高温情况下各个状态的概率是相等的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>3. 低温下的情况</strong></p>
+<p><img src="/2023/08/22/docs/AI/annealing/image-20230911152700808.png" alt></p>
+<p><img src="/2023/08/22/docs/AI/annealing/image-20230911152730110.png" alt></p>
+<p>即系统等概率趋近于几个内能最小的状态之一<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>系统达到内能最小状态的概率为1<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于其他状态的概率为0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>4. 温度缓慢下降的情况</strong></p>
+<p><img src="/2023/08/22/docs/AI/annealing/image-20230911153119874.png" alt></p>
+<p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>系统处于低能状态的概率随着温度的下降单调上升<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于高能状态的概率随着温度的下降单调下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p>从另一个角度说明了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>当温度为绝对零度时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统只能为内能最小的状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>5. 退火过程的三个条件</strong></p>
+<p>初始温度必须足够高<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>各个状态都等概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
+<p>在每个温度下状态的交换必须足够充分<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
+<p>温度<span class="markdown-them-math-inline">$T$</span>的下降必须足够缓慢<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h2 id="组合优化问题与退火过程的类比">组合优化问题与退火过程的类比</h2>
+<table>
+<thead>
+<tr>
+<th>退火过程</th>
+<th>组合优化问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物理系统中的一个状态<span class="markdown-them-math-inline">$i$</span></td>
+<td>组合优化问题的解<span class="markdown-them-math-inline">$i$</span></td>
+</tr>
+<tr>
+<td>状态的内能<span class="markdown-them-math-inline">$E(i)$</span></td>
+<td>解的指标函数<span class="markdown-them-math-inline">$f(i)$</span></td>
+</tr>
+<tr>
+<td>内能最低状态</td>
+<td>最优解</td>
+</tr>
+<tr>
+<td>温度<span class="markdown-them-math-inline">$T$</span></td>
+<td>控制参数<span class="markdown-them-math-inline">$t$</span></td>
+</tr>
+<tr>
+<td>粒子的热运动</td>
+<td>解在领域内的交换</td>
+</tr>
+</tbody>
+</table>
+<h2 id="模拟退火算法">模拟退火算法</h2>
+<ul>
+<li>基本思想<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在局部搜索算法中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>从领域中随机选择一个解<span class="markdown-them-math-inline">$j$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>按照Metropolis准则接受该解<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+<p><img src="/2023/08/22/docs/AI/annealing/image-20230911160320100.png" alt></p>
+<blockquote>
+<p><em>算法需要解决的几个问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></em></p>
+<p>(1) 初始温度<span class="markdown-them-math-inline">$t_0$</span></p>
+<p>(2) 温度<span class="markdown-them-math-inline">$t$</span>的衰减函数</p>
+<p>(3) 算法的终止准则</p>
+<p>(4) 每个温度<span class="markdown-them-math-inline">$t$</span>下的马尔可夫链长度**<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>什么叫做达到平衡<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>**</p>
+</blockquote>
+<h3 id="初始温度">初始温度</h3>
+<ul>
+<li>基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>足够高的初始温度<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>以等概率处于任何一个状态</li>
+</ul>
+<div class="markdown-them-math-block">$$\exp(-\frac{\Delta f(i,j)}{t_0})=P_0 \approx 1
+$$</div><p>得<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$t_0=\frac{\Delta f(i,j)}{\ln(P_0^{-1})}
+$$</div><p>其中<span class="markdown-them-math-inline">$\Delta f(i,j)$</span>为状态<span class="markdown-them-math-inline">$j$</span>和状态<span class="markdown-them-math-inline">$i$</span>的指标函数差<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>可由随机产生的序列<span class="markdown-them-math-inline">$S$</span>计算<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<p><img src="/2023/08/22/docs/AI/annealing/image-20230911162842500.png" alt></p>
+<p>另一种选取方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>假设在<span class="markdown-them-math-inline">$t_0$</span>下随机的生成一个状态序列<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>分别用<span class="markdown-them-math-inline">$m_1$</span>和<span class="markdown-them-math-inline">$m_2$</span>表示指标函数下降的状态数和指标函数上升的状态数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$\overline{\Delta f(i,j)}$</span>表示指标函数增加的平均值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>则<span class="markdown-them-math-inline">$m_2$</span>个状态中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>被接受的个数为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$m_2\exp(-\frac{\overline{\Delta f(i,j)}}{t_0})
+$$</div><p>则有平均接受概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$P_0=\frac{m_1+m_2\exp(-\frac{\overline{\Delta f(i,j)}}{t_0})}{m_1+m_2}
+$$</div><p>令<span class="markdown-them-math-inline">$P_0\rightarrow1$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>反解<span class="markdown-them-math-inline">$t_0=\frac{\overline{\Delta f(i,j)}}{\ln(\frac{m_2}{m_2P_0-m_1(1-P_0)})}$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h3 id="温度的下降方法">温度的下降方法</h3>
+<ul>
+<li>基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>下降的足够缓慢</li>
+</ul>
+<p><strong>1. 等比例下降</strong></p>
+<div class="markdown-them-math-block">$$t_{k+1}=\alpha t_k, \ 0 &lt; \alpha &lt; 1
+$$</div><p><strong>2.等值下降</strong></p>
+<div class="markdown-them-math-block">$$t_{k+1}=t_k-\Delta t
+$$</div><h3 id="每一温度下的停止准则">每一温度下的停止准则</h3>
+<ul>
+<li>在每个温度下要有足够的交换次数</li>
+</ul>
+<p>固定长度方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在每一个温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>都使用相同的<span class="markdown-them-math-inline">$L_k$</span><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>交换次数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>一般可以将<span class="markdown-them-math-inline">$L_k$</span>选择为<strong>关于问题规模<span class="markdown-them-math-inline">$n$</span>的一个多项式函数</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h3 id="算法的终止原则">算法的终止原则</h3>
+<ul>
+<li>基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>温度足够低</li>
+</ul>
+<p><strong>1. 零度法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span> <span class="markdown-them-math-inline">$t &lt; \epsilon$</span>时结束</strong></p>
+<p><strong>2. 循环总控制法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>循环下降次数达到<span class="markdown-them-math-inline">$K$</span>时结束</strong></p>
+<ol start="3">
+<li><strong>无变化控制法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在相邻的<span class="markdown-them-math-inline">$n$</span>个温度中得到的指标函数值无变化</strong><em><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>一般来说两个温度相等就可以了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></em></li>
+</ol>
+<h2 id="tsp">TSP</h2>
+<h3 id="解空间">解空间</h3>
+<ul>
+<li>10城市<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$10!=3628800$</span></li>
+<li>20城市<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$20!\approx2.43\times10^{18}$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不可能穷举</li>
+</ul>
+<h3 id="指标函数">指标函数</h3>
+<div class="markdown-them-math-block">$$f(\pi_1, \dots, \pi_n)=\sum_{i=1}^nd_{\pi_i\pi_{i+1}}\\
+\pi_{n+1}=\pi_1
+$$</div><h3 id="新解的产生">新解的产生</h3>
+<ul>
+<li>逆序交换法</li>
+</ul>
+<p>当前解<span class="markdown-them-math-inline">$(\pi_1, \dots, \pi_u, \pi_{u+1}, \dots, \pi_{v-1}, \pi_v, \dots, \pi_n)$</span></p>
+<p>交换后<span class="markdown-them-math-inline">$((\pi_1, \dots, \pi_u, \pi_{v-1}, \dots, \pi_{u+1}, \pi_v, \dots, \pi_n))$</span><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>相当于中间<code>reverse</code>了一次<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$P_{i\rightarrow j}(t)=\exp(-\frac{f(j)-f(i)}{t})=\exp(-\frac{\Delta f}{t})\\
+\Delta f = f(j)- f(i)
+=(d_{\pi_u \pi_{v-1}} + d_{\pi_{u+1}\pi_v}) - (d_{\pi_u \pi_{u+1}} + d_{\pi_{v-1}\pi_v})
+$$</div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="default-docs/AI/genetic" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="../2023/08/22/docs/AI/genetic/" class="article-date">
@@ -590,182 +766,6 @@ $$</div><p>和适应函数的绝对大小无关<span class="bd-box"><h-char clas
 $$</div><p><strong>3. 离线比较法</strong></p>
 <p>每一代最好结果的平均值的变化</p>
 <div class="markdown-them-math-block">$$v_{offline}=\frac{1}{T}\sum_{t=1}^Tf^*(t)
-$$</div>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="default-docs/AI/annealing" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="../2023/08/22/docs/AI/annealing/" class="article-date">
-  <time class="dt-published" datetime="2023-08-21T16:00:00.000Z" itemprop="datePublished">2023-08-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="../categories/%E6%96%87%E6%A1%A3/">文档</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="../2023/08/22/docs/AI/annealing/">组合优化问题：退火算法</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="退火过程">退火过程</h2>
-<ul>
-<li>
-<p>升温<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>随着温度的不断上升<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子<strong>逐渐脱离其平衡位置<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>变得越来越自由</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直到达到固体的溶解温度<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子排列从原来的有序状态变为完全的无序状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-</li>
-<li>
-<p>退火<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>随着温度的下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子的热运动逐渐减弱<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子逐渐停留在不同的状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>其排列也从无序向有序方向发展<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>直至到温度很低时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>重新以一定的结构排列<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-</li>
-<li>
-<p>粒子不同的排列结构<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>对应着不同的内能水平<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>如果退火过程是缓慢进行的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>温度的下降如果非常缓慢的话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>使得在每个温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>粒子的排列都达到一种平衡态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则当温度趋于绝对零度时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统的内能将趋于最小值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-</li>
-</ul>
-<h3 id="metropolis准则">Metropolis准则</h3>
-<p>从状态i转换为状态j的转换准则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<p>如果<span class="markdown-them-math-inline">$E(j)\leq E(i)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则状态转换被接受<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
-<p>如果<span class="markdown-them-math-inline">$E(j)&gt;E(i)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则状态转移被接受的概率为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$\exp(\frac{E(i)-E(j)}{kT})$</span></p>
-<blockquote>
-<p>Boltzmann分布律<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$P_i(T)=\frac{e^{-\frac{E(i)}{kT}}}{Z_T}$</span></p>
-</blockquote>
-<h3 id="退火过程分析">退火过程分析</h3>
-<p><strong>1. 同一温度下两个内能不同的状态</strong></p>
-<p>假设<span class="markdown-them-math-inline">$E(i)&lt;E(j)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>那么<span class="markdown-them-math-inline">$P_i(T)-P_j(T)&gt;0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>也即在任何温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统<strong>处于低内能状态的概率大于处于高内能状态的概率</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>2.高温下的情况</strong></p>
-<div class="markdown-them-math-block">$$\lim_{T\rightarrow\infin}P_i(T)=\lim_{T\rightarrow\infin}\frac{\exp(-\frac{E(i)}{kT})}{\sum_{j\in S}\exp(-\frac{E(j)}{kT})} = \frac{1}{\left| S\right|}
-$$</div><p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>高温情况下各个状态的概率是相等的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>3. 低温下的情况</strong></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911152700808.png" alt></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911152730110.png" alt></p>
-<p>即系统等概率趋近于几个内能最小的状态之一<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>系统达到内能最小状态的概率为1<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于其他状态的概率为0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>4. 温度缓慢下降的情况</strong></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911153119874.png" alt></p>
-<p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>系统处于低能状态的概率随着温度的下降单调上升<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于高能状态的概率随着温度的下降单调下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p>从另一个角度说明了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>当温度为绝对零度时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统只能为内能最小的状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<p><strong>5. 退火过程的三个条件</strong></p>
-<p>初始温度必须足够高<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>各个状态都等概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
-<p>在每个温度下状态的交换必须足够充分<span class="bd-box"><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
-<p>温度<span class="markdown-them-math-inline">$T$</span>的下降必须足够缓慢<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<h2 id="组合优化问题与退火过程的类比">组合优化问题与退火过程的类比</h2>
-<table>
-<thead>
-<tr>
-<th>退火过程</th>
-<th>组合优化问题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>物理系统中的一个状态<span class="markdown-them-math-inline">$i$</span></td>
-<td>组合优化问题的解<span class="markdown-them-math-inline">$i$</span></td>
-</tr>
-<tr>
-<td>状态的内能<span class="markdown-them-math-inline">$E(i)$</span></td>
-<td>解的指标函数<span class="markdown-them-math-inline">$f(i)$</span></td>
-</tr>
-<tr>
-<td>内能最低状态</td>
-<td>最优解</td>
-</tr>
-<tr>
-<td>温度<span class="markdown-them-math-inline">$T$</span></td>
-<td>控制参数<span class="markdown-them-math-inline">$t$</span></td>
-</tr>
-<tr>
-<td>粒子的热运动</td>
-<td>解在领域内的交换</td>
-</tr>
-</tbody>
-</table>
-<h2 id="模拟退火算法">模拟退火算法</h2>
-<ul>
-<li>基本思想<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在局部搜索算法中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>从领域中随机选择一个解<span class="markdown-them-math-inline">$j$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>按照Metropolis准则接受该解<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
-</ul>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911160320100.png" alt></p>
-<blockquote>
-<p><em>算法需要解决的几个问题<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></em></p>
-<p>(1) 初始温度<span class="markdown-them-math-inline">$t_0$</span></p>
-<p>(2) 温度<span class="markdown-them-math-inline">$t$</span>的衰减函数</p>
-<p>(3) 算法的终止准则</p>
-<p>(4) 每个温度<span class="markdown-them-math-inline">$t$</span>下的马尔可夫链长度**<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>什么叫做达到平衡<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>**</p>
-</blockquote>
-<h3 id="初始温度">初始温度</h3>
-<ul>
-<li>基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>足够高的初始温度<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>以等概率处于任何一个状态</li>
-</ul>
-<div class="markdown-them-math-block">$$\exp(-\frac{\Delta f(i,j)}{t_0})=P_0 \approx 1
-$$</div><p>得<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<div class="markdown-them-math-block">$$t_0=\frac{\Delta f(i,j)}{\ln(P_0^{-1})}
-$$</div><p>其中<span class="markdown-them-math-inline">$\Delta f(i,j)$</span>为状态<span class="markdown-them-math-inline">$j$</span>和状态<span class="markdown-them-math-inline">$i$</span>的指标函数差<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>可由随机产生的序列<span class="markdown-them-math-inline">$S$</span>计算<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911162842500.png" alt></p>
-<p>另一种选取方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>假设在<span class="markdown-them-math-inline">$t_0$</span>下随机的生成一个状态序列<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>分别用<span class="markdown-them-math-inline">$m_1$</span>和<span class="markdown-them-math-inline">$m_2$</span>表示指标函数下降的状态数和指标函数上升的状态数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$\overline{\Delta f(i,j)}$</span>表示指标函数增加的平均值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>则<span class="markdown-them-math-inline">$m_2$</span>个状态中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>被接受的个数为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<div class="markdown-them-math-block">$$m_2\exp(-\frac{\overline{\Delta f(i,j)}}{t_0})
-$$</div><p>则有平均接受概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<div class="markdown-them-math-block">$$P_0=\frac{m_1+m_2\exp(-\frac{\overline{\Delta f(i,j)}}{t_0})}{m_1+m_2}
-$$</div><p>令<span class="markdown-them-math-inline">$P_0\rightarrow1$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>反解<span class="markdown-them-math-inline">$t_0=\frac{\overline{\Delta f(i,j)}}{\ln(\frac{m_2}{m_2P_0-m_1(1-P_0)})}$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<h3 id="温度的下降方法">温度的下降方法</h3>
-<ul>
-<li>基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>下降的足够缓慢</li>
-</ul>
-<p><strong>1. 等比例下降</strong></p>
-<div class="markdown-them-math-block">$$t_{k+1}=\alpha t_k, \ 0 &lt; \alpha &lt; 1
-$$</div><p><strong>2.等值下降</strong></p>
-<div class="markdown-them-math-block">$$t_{k+1}=t_k-\Delta t
-$$</div><h3 id="每一温度下的停止准则">每一温度下的停止准则</h3>
-<ul>
-<li>在每个温度下要有足够的交换次数</li>
-</ul>
-<p>固定长度方法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在每一个温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>都使用相同的<span class="markdown-them-math-inline">$L_k$</span><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>交换次数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>一般可以将<span class="markdown-them-math-inline">$L_k$</span>选择为<strong>关于问题规模<span class="markdown-them-math-inline">$n$</span>的一个多项式函数</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
-<h3 id="算法的终止原则">算法的终止原则</h3>
-<ul>
-<li>基本原则<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>温度足够低</li>
-</ul>
-<p><strong>1. 零度法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span> <span class="markdown-them-math-inline">$t &lt; \epsilon$</span>时结束</strong></p>
-<p><strong>2. 循环总控制法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>循环下降次数达到<span class="markdown-them-math-inline">$K$</span>时结束</strong></p>
-<ol start="3">
-<li><strong>无变化控制法<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在相邻的<span class="markdown-them-math-inline">$n$</span>个温度中得到的指标函数值无变化</strong><em><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>一般来说两个温度相等就可以了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></em></li>
-</ol>
-<h2 id="tsp">TSP</h2>
-<h3 id="解空间">解空间</h3>
-<ul>
-<li>10城市<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$10!=3628800$</span></li>
-<li>20城市<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span><span class="markdown-them-math-inline">$20!\approx2.43\times10^{18}$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>不可能穷举</li>
-</ul>
-<h3 id="指标函数">指标函数</h3>
-<div class="markdown-them-math-block">$$f(\pi_1, \dots, \pi_n)=\sum_{i=1}^nd_{\pi_i\pi_{i+1}}\\
-\pi_{n+1}=\pi_1
-$$</div><h3 id="新解的产生">新解的产生</h3>
-<ul>
-<li>逆序交换法</li>
-</ul>
-<p>当前解<span class="markdown-them-math-inline">$(\pi_1, \dots, \pi_u, \pi_{u+1}, \dots, \pi_{v-1}, \pi_v, \dots, \pi_n)$</span></p>
-<p>交换后<span class="markdown-them-math-inline">$((\pi_1, \dots, \pi_u, \pi_{v-1}, \dots, \pi_{u+1}, \pi_v, \dots, \pi_n))$</span><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>相当于中间<code>reverse</code>了一次<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></p>
-<div class="markdown-them-math-block">$$P_{i\rightarrow j}(t)=\exp(-\frac{f(j)-f(i)}{t})=\exp(-\frac{\Delta f}{t})\\
-\Delta f = f(j)- f(i)
-=(d_{\pi_u \pi_{v-1}} + d_{\pi_{u+1}\pi_v}) - (d_{\pi_u \pi_{u+1}} + d_{\pi_{v-1}\pi_v})
 $$</div>
       
     </div>
@@ -1353,11 +1353,11 @@ git push
       <ul>
         
           <li>
-            <a href="../2023/08/22/docs/AI/genetic/">组合优化问题：遗传算法</a>
+            <a href="../2023/08/22/docs/AI/annealing/">组合优化问题：退火算法</a>
           </li>
         
           <li>
-            <a href="../2023/08/22/docs/AI/annealing/">组合优化问题：退火算法</a>
+            <a href="../2023/08/22/docs/AI/genetic/">组合优化问题：遗传算法</a>
           </li>
         
           <li>
