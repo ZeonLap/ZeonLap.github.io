@@ -392,14 +392,28 @@
 <p>假设<span class="markdown-them-math-inline">$E(i)&lt;E(j)$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>那么<span class="markdown-them-math-inline">$P_i(T)-P_j(T)&gt;0$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>也即在任何温度下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统<strong>处于低内能状态的概率大于处于高内能状态的概率</strong><span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>2.高温下的情况</strong></p>
 <div class="markdown-them-math-block">$$\lim_{T\rightarrow\infin}P_i(T)=\lim_{T\rightarrow\infin}\frac{\exp(-\frac{E(i)}{kT})}{\sum_{j\in S}\exp(-\frac{E(j)}{kT})} = \frac{1}{\left| S\right|}
-$$</div><p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>高温情况下各个状态的概率是相等的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+$$</div><p><span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>每一项都是<span class="markdown-them-math-inline">$1$</span><span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span></p>
+<p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>高温情况下各个状态的概率是相等的<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>3. 低温下的情况</strong></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911152700808.png" alt></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911152730110.png" alt></p>
+<div class="markdown-them-math-block">$$\lim_{T\to 0}P_i(T) = \lim_{T\to 0}\left[\frac{e^{-\frac{E(i)}{kT}}}{\sum_{j\in S}e^{-\frac{E(j)}{kT}}}\right]
+= \lim_{T\to 0}\left[\frac{e^{-\frac{E(i)-E_m}{kT}}}{\sum_{j\in S}e^{-\frac{E(j)-E_m}{kT}}}\right] \\
+= \lim_{T\to 0}\left[\frac{e^{-\frac{E(i)-E_m}{kT}}}{\sum_{j\in S_m}e^{-\frac{E(j)-E_m}{kT}} + \sum_{j\notin S_m}e^{-\frac{E(j)-E_m}{kT}}}\right] \\
+= 
+\begin{cases}
+\frac{1}{\left|S_m\right|}, &amp; i \in S_m \\
+0, &amp; i \notin S_m
+\end{cases}
+$$</div><p><span class="markdown-them-math-inline">$S_m$</span>表示系统最小内能状态的集合<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$E_m$</span>表示系统的最小内能</p>
 <p>即系统等概率趋近于几个内能最小的状态之一<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>系统达到内能最小状态的概率为1<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于其他状态的概率为0<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>4. 温度缓慢下降的情况</strong></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911153119874.png" alt></p>
-<p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>系统处于低能状态的概率随着温度的下降单调上升<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于高能状态的概率随着温度的下降单调下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$\frac{\partial P_i(T)}{\partial T}=\frac{\partial}{\partial T}\left[\frac{e^{-\frac{E(i)}{kT}}}{Z_T}\right] \\
+=\frac{P_i(T)}{kT^2}[E(i)-\overline{E_T}] \\
+\begin{cases}
+&gt; 0, &amp; E(i) &gt; \overline{E_T}, 高能状态 \\
+&lt; 0, &amp; E(i) &lt; \overline{E_T}, 低能状态
+\end{cases} \\
+其中\overline{E_T}=\sum_{j\in S}E(j)P_j(T)为状态内能的平均值
+$$</div><p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>系统处于低能状态的概率随着温度的下降单调上升<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而系统处于高能状态的概率随着温度的下降单调下降<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p>从另一个角度说明了<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>当温度为绝对零度时<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统只能为内能最小的状态<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>5. 退火过程的三个条件</strong></p>
 <p>初始温度必须足够高<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>各个状态都等概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>；</h-inner></h-char></span></p>
@@ -456,8 +470,10 @@ $$</div><p>也就是说<span class="bd-box"><h-char class="bd bd-beg"><h-inner>�
 $$</div><p>得<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$t_0=\frac{\Delta f(i,j)}{\ln(P_0^{-1})}
 $$</div><p>其中<span class="markdown-them-math-inline">$\Delta f(i,j)$</span>为状态<span class="markdown-them-math-inline">$j$</span>和状态<span class="markdown-them-math-inline">$i$</span>的指标函数差<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>可由随机产生的序列<span class="markdown-them-math-inline">$S$</span>计算<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
-<p><img src="/2023/08/22/docs/AI/annealing/image-20230911162842500.png" alt></p>
-<p>另一种选取方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>假设在<span class="markdown-them-math-inline">$t_0$</span>下随机的生成一个状态序列<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>分别用<span class="markdown-them-math-inline">$m_1$</span>和<span class="markdown-them-math-inline">$m_2$</span>表示指标函数下降的状态数和指标函数上升的状态数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$\overline{\Delta f(i,j)}$</span>表示指标函数增加的平均值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>则<span class="markdown-them-math-inline">$m_2$</span>个状态中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>被接受的个数为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="markdown-them-math-block">$$\Delta f(i,j)=\max_{i\in S}f(i) - \min_{i\in S}f(i)
+$$</div><div class="markdown-them-math-block">$$\Delta f(i,j)=\frac{\sum_{i,j\in S}|f(i)-f(j)|}{|S|^2}
+$$</div><div class="markdown-them-math-block">$$\Delta f(i,j)=\frac{\sum_{i=0}^{|S|-1}|f(S(i))-f(S(i+1))|}{|S|}
+$$</div><p>另一种选取方式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>假设在<span class="markdown-them-math-inline">$t_0$</span>下随机的生成一个状态序列<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>分别用<span class="markdown-them-math-inline">$m_1$</span>和<span class="markdown-them-math-inline">$m_2$</span>表示指标函数下降的状态数和指标函数上升的状态数<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><span class="markdown-them-math-inline">$\overline{\Delta f(i,j)}$</span>表示指标函数增加的平均值<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>则<span class="markdown-them-math-inline">$m_2$</span>个状态中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>被接受的个数为<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$m_2\exp(-\frac{\overline{\Delta f(i,j)}}{t_0})
 $$</div><p>则有平均接受概率<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
 <div class="markdown-them-math-block">$$P_0=\frac{m_1+m_2\exp(-\frac{\overline{\Delta f(i,j)}}{t_0})}{m_1+m_2}
