@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <meta name="description" content="
-credit 编译原理实验书
+credit to 编译原理实验书
 
 关于SSH的使用
 1. 如何使用ssh登陆服务器？
@@ -16,7 +16,7 @@ ssh username@ip -p port
 
 2. 配置ssh免密登陆
 Step 1: 生成SSH密钥对
-首先，在本地计算机上生成SSH密钥对。这包括一个私钥（private key）和一个公钥（public ">
+首先，在本地计算机上生成SSH密钥对。这包括一个私钥（private key）和一个公钥（publ">
   
   
   
@@ -87,7 +87,7 @@ Step 1: 生成SSH密钥对
     <div class="e-content article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>credit <em>编译原理实验书</em></p>
+<p>credit to <em>编译原理实验书</em></p>
 </blockquote>
 <h2 id="关于ssh的使用">关于SSH的使用</h2>
 <h3 id="1-如何使用ssh登陆服务器&lt;span class=&quot;bd-box&quot;&gt;&lt;h-char class=&quot;bd bd-beg&quot;&gt;&lt;h-inner&gt;？&lt;/h-inner&gt;&lt;/h-char&gt;&lt;/span&gt;">1. 如何使用ssh登陆服务器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span></h3>
@@ -97,6 +97,9 @@ Step 1: 生成SSH密钥对
 <p><strong>Step 1:</strong> 生成SSH密钥对</p>
 <p>首先<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在本地计算机上生成SSH密钥对<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这包括一个私钥<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>private key<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>和一个公钥<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>public key<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <div class="highlight"><pre class="code"><code>ssh-keygen -t rsa
+</code></pre></div>
+<p>如果是生成github/gitlab的ssh密钥对<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则要按照以下的格式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>ssh-keygen -t rsa -C &quot;example@example.com&quot;
 </code></pre></div>
 <p>系统将会提示你指定保存密钥文件的路径和文件名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>默认情况下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>密钥对将保存在用户主目录下的.ssh文件夹中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>可以直接按回车键接受默认选项<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <p><strong>Step 2:</strong> 将公钥复制到目标服务器</p>
@@ -119,6 +122,15 @@ ssh-copy-id myserver
   
     
 <nav id="article-nav">
+  
+    <a href="../../../../24/Summary/2023Fall/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2023Fall
+        
+      </div>
+    </a>
   
   
     <a href="../../../../../08/22/docs/AI/annealing/" id="article-nav-older" class="article-nav-link-wrap">
@@ -150,6 +162,10 @@ ssh-copy-id myserver
       <ul>
         
           <li>
+            <a href="../../../../24/Summary/2023Fall/">2023Fall</a>
+          </li>
+        
+          <li>
             <a href="">关于SSH的使用</a>
           </li>
         
@@ -163,10 +179,6 @@ ssh-copy-id myserver
         
           <li>
             <a href="../../../../../07/20/docs/SE/nestjs/">NestJS</a>
-          </li>
-        
-          <li>
-            <a href="../../../../../07/01/Summary/2023Spring/">2023Spring</a>
           </li>
         
       </ul>
