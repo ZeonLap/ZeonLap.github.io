@@ -110,6 +110,14 @@ ssh-copy-id myserver
 </code></pre></div>
 <p>其中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>username</code>是你登陆远程服务器时使用的用户名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>remote_host</code>是远程服务器的地址或域名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>执行该命令后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统会要求输入你的密码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
 <h3 id="3-使用vscode进行远程coding">3. 使用VSCode进行远程coding</h3>
+<p><strong>Solved Problems:</strong></p>
+<ul>
+<li>终端里可以连接上服务器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>但VSCode不行
+<ul>
+<li>解决方案<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在服务器中删掉<code>~</code>下的<code>.vscode-server</code>文件夹<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>出现这个问题的原因是因为本地的<code>.vscode-server</code>与远程的不匹配<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
