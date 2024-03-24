@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>关于SSH的使用 | Let the voice of love take you higher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="description" content="
+credit to 编译原理实验书
+
+关于SSH的使用
+1. 如何使用ssh登陆服务器？
+ssh username@ip -p port
+
+2. 配置ssh免密登陆
+Step 1: 生成SSH密钥对
+首先，在本地计算机上生成SSH密钥对。这包括一个私钥（private key）和一个公钥（publ">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../../img/favicon.jpg">
+  
+  <link rel="stylesheet" href="../../../../../css/style.css">
+  
+    <link rel="stylesheet" href="../../../../../fancybox/jquery.fancybox-1.3.4.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="nav-outer">
+  <nav id="main-nav" class="outer">
+    <a id="main-nav-toggle" class="nav-icon"></a>
+    
+      <a class="main-nav-link" href="../../../../../index.html">Home</a>
+    
+      <a class="main-nav-link" href="../../../../../archives">Posts</a>
+    
+      <a class="main-nav-link" href="../../../../../about">About</a>
+    
+      <a class="main-nav-link" href="../../../../../friends">Friends</a>
+    
+    <div class="main-nav-space-between"></div>
+    
+  </nav>
+</div>
+<div id="header-title">
+  <h1 id="logo-wrap">
+    <a href="../../../../../index.html" id="logo">Let the voice of love take you higher</a>
+  </h1>
+  
+    <h2 id="subtitle-wrap">
+      <a href="../../../../../index.html" id="subtitle">聚集的力量, 连「时光」都能超越</a>
+    </h2>
+  
+</div>
+
+      <div id="content" class="outer">
+        <section id="main"><article id="default-docs/ssh" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2023-09-22T16:00:00.000Z" itemprop="datePublished">2023-09-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../../categories/%E6%96%87%E6%A1%A3/">文档</a>►<a class="article-category-link" href="../../../../../categories/%E6%96%87%E6%A1%A3/%E7%8E%AF%E5%A2%83/">环境</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      关于SSH的使用
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>credit to <em>编译原理实验书</em></p>
+</blockquote>
+<h2 id="关于ssh的使用">关于SSH的使用</h2>
+<h3 id="1-如何使用ssh登陆服务器&lt;span class=&quot;bd-box&quot;&gt;&lt;h-char class=&quot;bd bd-beg&quot;&gt;&lt;h-inner&gt;？&lt;/h-inner&gt;&lt;/h-char&gt;&lt;/span&gt;">1. 如何使用ssh登陆服务器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span></h3>
+<div class="highlight"><pre class="code"><code>ssh username@ip -p port
+</code></pre></div>
+<h3 id="2-配置ssh免密登陆">2. 配置ssh免密登陆</h3>
+<p><strong>Step 1:</strong> 生成SSH密钥对</p>
+<p>首先<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>在本地计算机上生成SSH密钥对<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>这包括一个私钥<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>private key<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char></span>和一个公钥<span class="bd-box"><h-char class="bd bd-end"><h-inner>（</h-inner></h-char></span>public key<span class="bd-box"><h-char class="bd bd-beg"><h-inner>）</h-inner></h-char><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>ssh-keygen -t rsa
+</code></pre></div>
+<p>如果是生成github/gitlab的ssh密钥对<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>则要按照以下的格式<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>ssh-keygen -t rsa -C &quot;example@example.com&quot;
+</code></pre></div>
+<p>系统将会提示你指定保存密钥文件的路径和文件名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>默认情况下<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>密钥对将保存在用户主目录下的.ssh文件夹中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>可以直接按回车键接受默认选项<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<p><strong>Step 2:</strong> 将公钥复制到目标服务器</p>
+<p>生成公钥后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>需要将公钥复制到目标服务器上<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<div class="highlight"><pre class="code"><code>ssh-copy-id username@remote_host
+或者
+ssh-copy-id myserver
+</code></pre></div>
+<p>其中<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>username</code>是你登陆远程服务器时使用的用户名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span><code>remote_host</code>是远程服务器的地址或域名<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>执行该命令后<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>系统会要求输入你的密码<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></p>
+<h3 id="3-使用vscode进行远程coding">3. 使用VSCode进行远程coding</h3>
+<p><strong>Solved Problems:</strong></p>
+<ul>
+<li>终端里可以连接上服务器<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>但VSCode不行
+<ul>
+<li>解决方案<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>在服务器中删掉<code>~</code>下的<code>.vscode-server</code>文件夹<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span>出现这个问题的原因是因为本地的<code>.vscode-server</code>与远程的不匹配<span class="bd-box"><h-char class="bd bd-beg"><h-inner>。</h-inner></h-char></span></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../../../08/22/docs/annealing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          组合优化问题：退火算法
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">关于SSH的使用</a>
+          </li>
+        
+          <li>
+            <a href="../../../../08/22/docs/annealing/">组合优化问题：退火算法</a>
+          </li>
+        
+          <li>
+            <a href="../../../../08/22/docs/genetic/">组合优化问题：遗传算法</a>
+          </li>
+        
+          <li>
+            <a href="../../../../07/20/docs/nestjs/">NestJS</a>
+          </li>
+        
+          <li>
+            <a href="../../../../../2022/11/01/Writings/MakeUp4ever/">浮生若梦</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../../categories/%E6%96%87%E6%A1%A3/">文档</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../../categories/%E6%96%87%E6%A1%A3/%E7%8E%AF%E5%A2%83/">环境</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../../categories/%E7%94%9F%E6%B4%BB/">生活</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../../categories/%E7%94%9F%E6%B4%BB/%E5%86%99%E4%BD%9C/">写作</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+</aside>
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a> &amp; Theme <a target="_blank" rel="noopener" href="https://github.com/bill-xia/hexo-theme-mashiro">Mashiro</a> &amp; GitHub Pages</p>
+<p>Copyright © 2023 LTNSXD. LICENSE CC BY-NC-SA 4.0.</p>
+      
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../../archives" class="mobile-nav-link">Posts</a>
+  
+    <a href="../../../../../about" class="mobile-nav-link">About</a>
+  
+    <a href="../../../../../friends" class="mobile-nav-link">Friends</a>
+  
+</nav>
+    
+
+<script src="../../../../../js/clipboard.min.js"></script>
+<script src="../../../../../js/jquery-1.4.3.min.js"></script>
+
+<script src="../../../../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+
+<script src="../../../../../js/script.js"></script>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+  </div>
+</body>
+</html>
