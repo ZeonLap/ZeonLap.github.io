@@ -61,7 +61,7 @@ prismjs:
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: '/home'
   per_page: 10
   order_by: -date
 
@@ -97,20 +97,23 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-## theme: mashiro
+theme: mashiro
 
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:LTNSXD/LTNSXD.github.io.git
+  repo: git@github.com:ZeonLap/ZeonLap.github.io.git
   branch: main
   
 # Math
 math:
-  engine: 'mathjax' # or 'katex'
+  engine: 'katex' # or 'mathjax'
   mathjax:
     # src: custom_mathjax_source
     config:
       # MathJax config
+
+# Mashiro
+transpunc: true
