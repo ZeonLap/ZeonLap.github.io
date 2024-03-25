@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Road2NLP | Let the voice of love take you higher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="description" content="LLaVA
+GPT-assisted Visual Instruction Data Generation
+
+Background
+
+We have image-text dataset like CC, LAION. But they are not good enough
+
+
+Solution
+">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../../img/favicon.jpg">
+  
+  <link rel="stylesheet" href="../../../../../css/style.css">
+  
+    <link rel="stylesheet" href="../../../../../fancybox/jquery.fancybox-1.3.4.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="nav-outer">
+  <nav id="main-nav" class="outer">
+    <a id="main-nav-toggle" class="nav-icon"></a>
+    
+      <a class="main-nav-link" href="../../../../../index.html">Home</a>
+    
+      <a class="main-nav-link" href="../../../../../archives">Posts</a>
+    
+      <a class="main-nav-link" href="../../../../../about">About</a>
+    
+      <a class="main-nav-link" href="../../../../../friends">Friends</a>
+    
+    <div class="main-nav-space-between"></div>
+    
+  </nav>
+</div>
+<div id="header-title">
+  <h1 id="logo-wrap">
+    <a href="../../../../../index.html" id="logo">Let the voice of love take you higher</a>
+  </h1>
+  
+    <h2 id="subtitle-wrap">
+      <a href="../../../../../index.html" id="subtitle">聚集的力量, 连「时光」都能超越</a>
+    </h2>
+  
+</div>
+
+      <div id="content" class="outer">
+        <section id="main"><article id="default-docs/Road2NLP" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2024-03-24T16:00:00.000Z" itemprop="datePublished">2024-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Road2NLP
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="llava">LLaVA</h2>
+<h3 id="gpt-assisted-visual instruction data generation">GPT-assisted Visual Instruction Data Generation</h3>
+<ul>
+<li>Background
+<ul>
+<li>We have image-text dataset like CC, LAION. But they are not good enough</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Use GPT-4 (<strong>text only</strong> models) to boost the text dataset</li>
+<li><strong>Note that the visual image is not used to prompt GPT</strong></li>
+</ul>
+</li>
+<li>How to prompt?
+<ul>
+<li>Captions &amp; Bounding boxed + few human designed examples</li>
+</ul>
+</li>
+<li>What to collect?
+<ol>
+<li>VQA (conversation)</li>
+<li>Describe the image in detail</li>
+<li>In-depth reasoning based on 1 and 2</li>
+</ol>
+</li>
+</ul>
+<p><img src="/2024/03/25/docs/Road2NLP/1.png" alt></p>
+<p><img src="/2024/03/25/docs/Road2NLP/2.png" alt></p>
+<h3 id="visual-instruction tuning">Visual Instruction Tuning</h3>
+<p><img src="/2024/03/25/docs/Road2NLP/3.png" alt></p>
+<p>Language Model: LLaMA</p>
+<p>Vision Enc: CLIP ViT-L/14</p>
+<p>Projection: linear w/o bias</p>
+<h3 id="dataset-preparation">Dataset Preparation</h3>
+<p><img src="/2024/03/25/docs/Road2NLP/4.png" alt></p>
+<p><img src="/2024/03/25/docs/Road2NLP/5.png" alt></p>
+<p>第一轮<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>问题在前 or 图片在前是随机的</p>
+<p>只在绿色的 Token 上计算 Loss (为什么X_instruct 后的 <STOP> 也要<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span>)</STOP></p>
+<h3 id="training-scheme">Training Scheme</h3>
+<ol>
+<li>
+<p><strong>Pre-training for Feature Alignment</strong></p>
+<p><strong>Learn Projection <span class="markdown-them-math-inline">$\textbf{W}$</span> only</strong></p>
+<p>只使用一轮的对话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而且只预测 Caption</p>
+<p><span class="markdown-them-math-inline">$\mathbf{X_a}$</span>​ 的 Ground Truth 是原先的 Caption</p>
+<p><img src="/2024/03/25/docs/Road2NLP/6.png" alt></p>
+</li>
+<li>
+<p><strong>Fine-tuning End-to-End</strong></p>
+<p>Learn Projection <span class="markdown-them-math-inline">$\mathbf{W}$</span> + LLM (w/o Visual Encoder)</p>
+<p>Train for:</p>
+<ul>
+<li>Multimodal Chatbot</li>
+<li>Science QA</li>
+</ul>
+</li>
+</ol>
+<h2 id="lmms_eval">LMMs_eval</h2>
+<p>TODO</p>
+<h2 id="benchmarks">Benchmarks</h2>
+<h3 id="mind2web">Mind2Web</h3>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../../../../2022/11/01/Writings/MakeUp4ever/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          浮生若梦
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Road2NLP</a>
+          </li>
+        
+          <li>
+            <a href="../../../../../2022/11/01/Writings/MakeUp4ever/">浮生若梦</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../../categories/%E7%94%9F%E6%B4%BB/">生活</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../../categories/%E7%94%9F%E6%B4%BB/%E5%86%99%E4%BD%9C/">写作</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+</aside>
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a> &amp; Theme <a target="_blank" rel="noopener" href="https://github.com/bill-xia/hexo-theme-mashiro">Mashiro</a> &amp; GitHub Pages</p>
+<p>Copyright © 2023 LTNSXD. LICENSE CC BY-NC-SA 4.0.</p>
+      
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../../archives" class="mobile-nav-link">Posts</a>
+  
+    <a href="../../../../../about" class="mobile-nav-link">About</a>
+  
+    <a href="../../../../../friends" class="mobile-nav-link">Friends</a>
+  
+</nav>
+    
+
+<script src="../../../../../js/clipboard.min.js"></script>
+<script src="../../../../../js/jquery-1.4.3.min.js"></script>
+
+<script src="../../../../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+
+<script src="../../../../../js/script.js"></script>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+  </div>
+</body>
+</html>

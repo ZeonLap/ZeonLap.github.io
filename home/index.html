@@ -52,6 +52,106 @@
       <div id="content" class="outer">
         <section id="main">
   
+    <article id="default-docs/Road2NLP" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="../2024/03/25/docs/Road2NLP/" class="article-date">
+  <time class="dt-published" datetime="2024-03-24T16:00:00.000Z" itemprop="datePublished">2024-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="../2024/03/25/docs/Road2NLP/">Road2NLP</a>
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="llava">LLaVA</h2>
+<h3 id="gpt-assisted-visual instruction data generation">GPT-assisted Visual Instruction Data Generation</h3>
+<ul>
+<li>Background
+<ul>
+<li>We have image-text dataset like CC, LAION. But they are not good enough</li>
+</ul>
+</li>
+<li>Solution
+<ul>
+<li>Use GPT-4 (<strong>text only</strong> models) to boost the text dataset</li>
+<li><strong>Note that the visual image is not used to prompt GPT</strong></li>
+</ul>
+</li>
+<li>How to prompt?
+<ul>
+<li>Captions &amp; Bounding boxed + few human designed examples</li>
+</ul>
+</li>
+<li>What to collect?
+<ol>
+<li>VQA (conversation)</li>
+<li>Describe the image in detail</li>
+<li>In-depth reasoning based on 1 and 2</li>
+</ol>
+</li>
+</ul>
+<p><img src="/2024/03/25/docs/Road2NLP/1.png" alt></p>
+<p><img src="/2024/03/25/docs/Road2NLP/2.png" alt></p>
+<h3 id="visual-instruction tuning">Visual Instruction Tuning</h3>
+<p><img src="/2024/03/25/docs/Road2NLP/3.png" alt></p>
+<p>Language Model: LLaMA</p>
+<p>Vision Enc: CLIP ViT-L/14</p>
+<p>Projection: linear w/o bias</p>
+<h3 id="dataset-preparation">Dataset Preparation</h3>
+<p><img src="/2024/03/25/docs/Road2NLP/4.png" alt></p>
+<p><img src="/2024/03/25/docs/Road2NLP/5.png" alt></p>
+<p>第一轮<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>问题在前 or 图片在前是随机的</p>
+<p>只在绿色的 Token 上计算 Loss (为什么X_instruct 后的 <STOP> 也要<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span>)</STOP></p>
+<h3 id="training-scheme">Training Scheme</h3>
+<ol>
+<li>
+<p><strong>Pre-training for Feature Alignment</strong></p>
+<p><strong>Learn Projection <span class="markdown-them-math-inline">$\textbf{W}$</span> only</strong></p>
+<p>只使用一轮的对话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而且只预测 Caption</p>
+<p><span class="markdown-them-math-inline">$\mathbf{X_a}$</span>​ 的 Ground Truth 是原先的 Caption</p>
+<p><img src="/2024/03/25/docs/Road2NLP/6.png" alt></p>
+</li>
+<li>
+<p><strong>Fine-tuning End-to-End</strong></p>
+<p>Learn Projection <span class="markdown-them-math-inline">$\mathbf{W}$</span> + LLM (w/o Visual Encoder)</p>
+<p>Train for:</p>
+<ul>
+<li>Multimodal Chatbot</li>
+<li>Science QA</li>
+</ul>
+</li>
+</ol>
+<h2 id="lmms_eval">LMMs_eval</h2>
+<p>TODO</p>
+<h2 id="benchmarks">Benchmarks</h2>
+<h3 id="mind2web">Mind2Web</h3>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="default-Writings/MakeUp4ever" class="h-entry article article-type-default" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="../2022/11/01/Writings/MakeUp4ever/" class="article-date">
@@ -114,6 +214,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="../2024/03/25/docs/Road2NLP/">Road2NLP</a>
+          </li>
         
           <li>
             <a href="../2022/11/01/Writings/MakeUp4ever/">浮生若梦</a>
