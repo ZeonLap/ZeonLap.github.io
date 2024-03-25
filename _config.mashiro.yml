@@ -1,0 +1,58 @@
+# Header
+menu:
+  Home: /
+  Posts: /archives
+  About: /about
+  Friends: /friends
+
+# Content
+excerpt_link: Read More
+fancybox: true
+
+# Sidebar
+sidebar: bottom
+widgets:
+- recent_posts
+- category
+- tagcloud
+
+copyright: |-
+  <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a> &amp; Theme <a target="_blank" rel="noopener" href="https://github.com/bill-xia/hexo-theme-mashiro">Mashiro</a> &amp; GitHub Pages</p>
+  <p>Copyright © 2023 LTNSXD. LICENSE CC BY-NC-SA 4.0.</p>
+
+# toc open 
+toc:
+  enable: true
+  default: false
+
+# Widget behavior
+archive_type: 'monthly'
+show_count: false
+recent_posts_limits: 5
+
+
+favicon: /img/favicon.jpg
+# rss: /atom.xml
+
+# valine comment system. https://valine.js.org
+valine:
+  enable: false # if you want use valine,please set this value is true
+  appId: sZwPhNQ0F1xzD0PAZt4Sxs9h-gzGzoHsz # leancloud application app id
+  appKey: uUh6uhCW8A5u8AV3ln4W48cG # leancloud application app key
+  notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
+  verify: false # valine verify code (true/false)
+  pageSize: 10 # comment list page size
+  avatar: mm # gravatar style https://valine.js.org/#/avatar
+  lang: zh-cn # i18n: zh-cn/en
+  placeholder: I came, I saw # valine comment input placeholder(like: Please leave your footprints )
+  guest_info: nick,mail,link #valine comment header info
+
+math:
+  enable: true
+  engine: katex
+
+# title-number : all | config | none
+title-number: config
+
+# blockquote: italic | grey
+blockquote: grey
