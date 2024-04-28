@@ -7,16 +7,14 @@
   <title>Road2NLP | Let the voice of love take you higher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="description" content="LLaVA
+  <meta name="description" content="Basis
+Attention
+LLaVA
 GPT-assisted Visual Instruction Data Generation
 
 Background
 
-We have image-text dataset like CC, LAION. But they are not good enough
-
-
-Solution
-">
+We have image-text dataset like CC, LAION. But they are not good en">
   
   
   
@@ -82,8 +80,10 @@ Solution
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="llava">LLaVA</h2>
-<h3 id="gpt-assisted-visual instruction data generation">GPT-assisted Visual Instruction Data Generation</h3>
+        <h2 id="basis" tabindex="-1">Basis</h2>
+<h3 id="attention" tabindex="-1">Attention</h3>
+<h2 id="llava" tabindex="-1">LLaVA</h2>
+<h3 id="gpt-assisted-visual-instruction-data-generation" tabindex="-1">GPT-assisted Visual Instruction Data Generation</h3>
 <ul>
 <li>Background
 <ul>
@@ -111,28 +111,28 @@ Solution
 </ul>
 <img src="/2024/03/25/docs/Road2NLP/1.png" style="zoom: 40%;">
 <img src="/2024/03/25/docs/Road2NLP/2.png" style="zoom:40%;">
-<h3 id="visual-instruction tuning">Visual Instruction Tuning</h3>
+<h3 id="visual-instruction-tuning" tabindex="-1">Visual Instruction Tuning</h3>
 <p><img src="/2024/03/25/docs/Road2NLP/3.png" alt></p>
 <p>Language Model: LLaMA</p>
 <p>Vision Enc: CLIP ViT-L/14</p>
 <p>Projection: linear w/o bias</p>
-<h3 id="dataset-preparation">Dataset Preparation</h3>
+<h3 id="dataset-preparation" tabindex="-1">Dataset Preparation</h3>
 <img src="/2024/03/25/docs/Road2NLP/4.png" style="zoom:40%;">
 <img src="/2024/03/25/docs/Road2NLP/5.png" style="zoom:40%;">
 <p>第一轮<span class="bd-box"><h-char class="bd bd-beg"><h-inner>：</h-inner></h-char></span>问题在前 or 图片在前是随机的</p>
 <p>只在绿色的 Token 上计算 Loss (为什么X_instruct 后的 <STOP> 也要<span class="bd-box"><h-char class="bd bd-beg"><h-inner>？</h-inner></h-char></span>)</STOP></p>
-<h3 id="training-scheme">Training Scheme</h3>
+<h3 id="training-scheme" tabindex="-1">Training Scheme</h3>
 <ol>
 <li>
 <p><strong>Pre-training for Feature Alignment</strong></p>
-<p><strong>Learn Projection <span class="markdown-them-math-inline">$\textbf{W}$</span> only</strong></p>
+<p><strong>Learn Projection <eq><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">W</mtext></mrow><annotation encoding="application/x-tex">\textbf{W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord text"><span class="mord textbf">W</span></span></span></span></span></eq> only</strong></p>
 <p>只使用一轮的对话<span class="bd-box"><h-char class="bd bd-beg"><h-inner>，</h-inner></h-char></span>而且只预测 Caption</p>
-<p><span class="markdown-them-math-inline">$\mathbf{X_a}$</span>​ 的 Ground Truth 是原先的 Caption</p>
-<p><img src="/2024/03/25/docs/Road2NLP/6.png" alt></p>
+<p><eq><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">X</mi><mi mathvariant="bold">a</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{X_a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8361em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1611em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathbf mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></eq>​ 的 Ground Truth 是原先的 Caption</p>
+<img src="/2024/03/25/docs/Road2NLP/6.png" style="zoom:0%;">
 </li>
 <li>
 <p><strong>Fine-tuning End-to-End</strong></p>
-<p>Learn Projection <span class="markdown-them-math-inline">$\mathbf{W}$</span> + LLM (w/o Visual Encoder)</p>
+<p>Learn Projection <eq><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">W</mi></mrow><annotation encoding="application/x-tex">\mathbf{W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6861em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">W</span></span></span></span></eq> + LLM (w/o Visual Encoder)</p>
 <p>Train for:</p>
 <ul>
 <li>Multimodal Chatbot</li>
@@ -140,10 +140,22 @@ Solution
 </ul>
 </li>
 </ol>
-<h2 id="lmms_eval">LMMs_eval</h2>
-<p>TODO</p>
-<h2 id="benchmarks">Benchmarks</h2>
-<h3 id="mind2web">Mind2Web</h3>
+<h3 id="evaluation" tabindex="-1">Evaluation</h3>
+<p>Using <a target="_blank" rel="noopener" href="https://github.com/EvolvingLMMs-Lab/lmms-eval">EvolvingLMMs-Lab/lmms-eval: Accelerating the development of large multimodal models (LMMs) with lmms-eval (github.com)</a></p>
+<h2 id="mind2web" tabindex="-1">Mind2Web</h2>
+<h3 id="mind2web-dataset" tabindex="-1">Mind2Web Dataset</h3>
+<p>Each instance in the dataset contains 3 opponents:</p>
+<ol>
+<li>**Task Description: **outlines the <strong>high-level goal</strong> of the task</li>
+<li>**Action Sequence: **which is the sequence of actions required to accomplish the task on the website. Each action in the sequence comprises a (Target Element, Operation) pair.</li>
+<li>**Webpage Snapshots: **HTML, DOM</li>
+</ol>
+<img src="/2024/03/25/docs/Road2NLP/image-20240402105354700.png" style="zoom: 40%;">
+<h2 id="cogagent" tabindex="-1">CogAgent</h2>
+<p>/* TODO */</p>
+<h2 id="pix2struct" tabindex="-1">Pix2Struct</h2>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css">
 
       
     </div>
