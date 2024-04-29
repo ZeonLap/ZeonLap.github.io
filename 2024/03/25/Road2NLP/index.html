@@ -13,18 +13,18 @@
 <meta property="og:site_name" content="Let the voice of love take you higher!">
 <meta property="og:description" content="Basis Attention LLaVA GPT-assisted Visual Instruction Data Generation  Background  We have image-text dataset like CC, LAION. But they are not good enough   Solution  Use GPT-4 (text only models) to b">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/1.png">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/2.png">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/3.png">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/4.png">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/5.png">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/6.png">
-<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/image-20240402105354700.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/1.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/2.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/3.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/4.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/5.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/6.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/image-20240402105354700.png">
 <meta property="article:published_time" content="2024-03-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-04T17:33:24.915Z">
+<meta property="article:modified_time" content="2024-04-29T18:18:12.073Z">
 <meta property="article:author" content="Zeonlap">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/Road2NLP/1.png">
+<meta name="twitter:image" content="http://zeonlap.github.io/2024/03/25/Road2NLP/1.png">
     
     
       
@@ -201,26 +201,26 @@
 </ol>
 </li>
 </ul>
-<img src="Road2NLP/1.png" style="zoom: 40%;" />
-<img src="Road2NLP/2.png" style="zoom:40%;" />
+<img src="/2024/03/25/Road2NLP/1.png" style="zoom: 40%;">
+<img src="/2024/03/25/Road2NLP/2.png" style="zoom:40%;">
 <h3 id="visual-instruction tuning">Visual Instruction Tuning</h3>
-<p><img src="Road2NLP/3.png" alt=""></p>
+<p><img src="/2024/03/25/Road2NLP/3.png" alt></p>
 <p>Language Model: LLaMA</p>
 <p>Vision Enc: CLIP ViT-L/14</p>
 <p>Projection: linear w/o bias</p>
 <h3 id="dataset-preparation">Dataset Preparation</h3>
-<img src="Road2NLP/4.png" style="zoom:40%;" />
-<img src="Road2NLP/5.png" style="zoom:40%;" />
+<img src="/2024/03/25/Road2NLP/4.png" style="zoom:40%;">
+<img src="/2024/03/25/Road2NLP/5.png" style="zoom:40%;">
 <p>第一轮：问题在前 or 图片在前是随机的</p>
-<p>只在绿色的 Token 上计算 Loss (为什么X_instruct 后的 <STOP> 也要？)</p>
+<p>只在绿色的 Token 上计算 Loss (为什么X_instruct 后的 <code>&lt;STOP&gt;</code> 也要？)</p>
 <h3 id="training-scheme">Training Scheme</h3>
 <ol>
 <li>
 <p><strong>Pre-training for Feature Alignment</strong></p>
 <p><strong>Learn Projection <span class="markdown-them-math-inline">$\textbf{W}$</span> only</strong></p>
 <p>只使用一轮的对话，而且只预测 Caption</p>
-<p><span class="markdown-them-math-inline">$\mathbf{X_a}$</span>​ 的 Ground Truth 是原先的 Caption</p>
-<img src="Road2NLP/6.png" style="zoom:0%;" />
+<p><span class="markdown-them-math-inline">$\mathbf{X_a}$</span> 的 Ground Truth 是原先的 Caption</p>
+<img src="/2024/03/25/Road2NLP/6.png" style="zoom:0%;">
 </li>
 <li>
 <p><strong>Fine-tuning End-to-End</strong></p>
@@ -242,7 +242,7 @@
 <li>**Action Sequence: **which is the sequence of actions required to accomplish the task on the website. Each action in the sequence comprises a (Target Element, Operation) pair.</li>
 <li>**Webpage Snapshots: **HTML, DOM</li>
 </ol>
-<img src="Road2NLP/image-20240402105354700.png" style="zoom: 40%;" />
+<img src="/2024/03/25/Road2NLP/image-20240402105354700.png" style="zoom: 40%;">
 <h2 id="cogagent">CogAgent</h2>
 <p>/* TODO */</p>
 <h2 id="pix2struct">Pix2Struct</h2>
