@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1. 请简要描述RPKI的证书签发体系是怎样构成的 RPKI 架构的各个组成部分为：   证书签发体系：由分布全球的 RPKI 认证中心组成，用于 RPKI 资源证书签发。    证书存储系统：RPKI 涉及的所有证书都存放在 RPKI 资料库中，RPKI 资料库采用分布式存储结构，由很多数据库组成。   证书同步验证机制：RPKI 资料库可以供依赖方同步，RP 同步并验证 RPKI 证书 和签名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测">
+<meta property="og:url" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/index.html">
+<meta property="og:site_name" content="Let the voice of love take you higher!">
+<meta property="og:description" content="1. 请简要描述RPKI的证书签发体系是怎样构成的 RPKI 架构的各个组成部分为：   证书签发体系：由分布全球的 RPKI 认证中心组成，用于 RPKI 资源证书签发。    证书存储系统：RPKI 涉及的所有证书都存放在 RPKI 资料库中，RPKI 资料库采用分布式存储结构，由很多数据库组成。   证书同步验证机制：RPKI 资料库可以供依赖方同步，RP 同步并验证 RPKI 证书 和签名">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/image-20240519011839628.png">
+<meta property="og:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/download.png">
+<meta property="article:published_time" content="2024-05-19T16:11:53.605Z">
+<meta property="article:modified_time" content="2024-05-19T16:12:14.495Z">
+<meta property="article:author" content="Zeonlap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/image-20240519011839628.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/img/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/img/favicon.ico" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+        
+      
+    
+    <!-- title -->
+    <title>第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/ZeonLap">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/30/hello-world/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&text=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&is_video=false&description=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测&body=Check out this article: http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&name=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&t=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%B7%E7%AE%80%E8%A6%81%E6%8F%8F%E8%BF%B0rpki%E7%9A%84%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%8F%91%E4%BD%93%E7%B3%BB%E6%98%AF%E6%80%8E%E6%A0%B7%E6%9E%84%E6%88%90%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">1. 请简要描述RPKI的证书签发体系是怎样构成的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%81%E9%87%8F%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87%E5%BA%94%E8%AF%A5%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%EF%BC%9F%E6%A3%80%E6%B5%8B%E5%90%8E%E7%9A%84%E9%98%B2%E5%BE%A1%E6%89%8B%E6%AE%B5%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88%EF%BC%9F%E8%AF%B7%E5%90%84%E5%88%97%E4%B8%BE5%E6%9D%A1%E5%B9%B6%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">2. 流量检测算法设计目标应该包含什么？检测后的防御手段包含哪些方案？请各列举5条并简要分析</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zeonlap</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-19T16:11:53.605Z" class="dt-published" itemprop="datePublished">2024-05-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CyberSecurity/">CyberSecurity</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="1-请简要描述rpki的证书签发体系是怎样构成的">1. 请简要描述RPKI的证书签发体系是怎样构成的</h2>
+<p>RPKI 架构的各个组成部分为：</p>
+<ul>
+<li>
+<p>证书签发体系：由分布全球的 RPKI 认证中心组成，用于 RPKI 资源证书签发。</p>
+<img src="/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/image-20240519011839628.png" style="zoom: 67%;">
+</li>
+<li>
+<p>证书存储系统：RPKI 涉及的所有证书都存放在 RPKI 资料库中，RPKI 资料库采用分布式存储结构，由很多数据库组成。</p>
+</li>
+<li>
+<p>证书同步验证机制：RPKI 资料库可以供依赖方同步，RP 同步并验证 RPKI 证书 和签名对象。RP 同步并验证后将验证结果（IP 地址前缀和 AS 号的绑定关系） 提供给互联网域间路由系统中的边界路由器指导路由过滤，该系统是由部署在不同网络自治域的BGP路由器组成。</p>
+</li>
+</ul>
+<p>路由起源认证构成例子：</p>
+<img src="/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/download.png" style="zoom:67%;">
+<ol>
+<li>APNIC签发自签名的根证书①：{签发者：APNIC，接收者：APNIC，号码资源：10.1.0.0/16，10.2.0.0/16，AS1-AS99 }，证书生成后，APNIC会将根证书存储在自己的资料库中；</li>
+<li>APNIC使用根证书①为ISP1签发资源证书②：{签发者：APNIC，接收者：ISP1，号码资源：10.1.0.0/18，10.2.0.0/20，AS1-AS9}，证书生成后，ISP1也会将签发的证书存储在自己的资料库中；</li>
+<li>ISP1使用自己的证书②签发ROA③：{签发者：ISP1，绑定关系：10.1.1.0/24 &amp; AS1}，通过签发ROA签名来授权某个自治网络对某个IP地址前缀发起路由起源通告。ROA将该自治网络的AS号与该IP前缀绑定在一起。</li>
+</ol>
+<p>Reference: <a target="_blank" rel="noopener" href="https://info.support.huawei.com/info-finder/encyclopedia/zh/RPKI.html">RPKI是什么？为什么需要RPKI？ - 华为 (huawei.com)</a></p>
+<h2 id="2-流量检测算法设计目标应该包含什么？检测后的防御手段包含哪些方案？请各列举5条并简要分析">2. 流量检测算法设计目标应该包含什么？检测后的防御手段包含哪些方案？请各列举5条并简要分析</h2>
+<p>流量检测算法的设计目标有：</p>
+<ul>
+<li>
+<p>对于各种攻击具有通用性</p>
+</li>
+<li>
+<p>在检测攻击上的鲁棒性和泛化性</p>
+<ul>
+<li>比如基于人工智能的流量检测算法具有泛化性</li>
+</ul>
+</li>
+<li>
+<p>能够检测加密流量</p>
+<ul>
+<li>比如可以通过 TLS 头来检测出一部分使用 TLS 加密的恶意流量</li>
+</ul>
+</li>
+<li>
+<p>能够处理大规模的流量</p>
+</li>
+<li>
+<p>能够快速输出检测结果</p>
+<ul>
+<li>基于流粒度特征的流量分析相较于基于包粒度特征的流量分析具有更好的实时性</li>
+</ul>
+</li>
+</ul>
+<p>检测后的防御手段有：</p>
+<ul>
+<li><strong>路由黑洞</strong>：由受害者所在的 AS 向上所有节点发送 BGP Update，宣告对应的网段不可达，隐蔽攻击目标。
+<ul>
+<li>优点：可以在 AS 之前就拦截流量；使用 BGP 协议直接实现；只需要受害者的地址信息。</li>
+<li>缺点：同时拦截了正常流量和恶意流量。</li>
+</ul>
+</li>
+<li><strong>IP 黑名单</strong>：防御者认为来自黑名单中的IP发送的流量为恶意流量。
+<ul>
+<li>优点：可以直接部署在防火墙；在短期内有效预防攻击。</li>
+<li>缺点：同时拦截正常流量和恶意流量；维护 IP 地址人力资源开销大。</li>
+</ul>
+</li>
+<li><strong>流量清洗攻击</strong>：流量清洗中心 (Traffic Scrubbing Centers) 是一组拥有特征匹配功能的网络设备集群，对通过的流量进行流量特征匹配，拦截攻击流量，最后将正常流量返还给目的端。通常清洗中心位于边缘网络，即距离客户端近的网络，从而降低攻击流量在因特网上的传播距离
+<ul>
+<li>优点：在距离边缘节点近的位置过滤流量；可以灵活按需配给。</li>
+<li>缺点：流量特征匹配难以实现。</li>
+</ul>
+</li>
+<li><strong>可编程交换机方案</strong>：在交换机上高效部署过滤规则
+<ul>
+<li>Poseidon：在可编程交换机上，利用交换机寄存器提取流量特征。</li>
+<li>Jaqen：在可编程交换机上，利用 SRAM 提取流量特征；特别地，引入 Sketch 数据结构，对被统计地特征进行近似统计。</li>
+<li>Ripple：在可编程交换机上，利用SRAM资源提取流量特征，将传统的单点部署转变成为多点部署，节点共享统计量。将传统单一交换设备上的规则转换成为分布式的规则，可以对LFA进行防御。</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/ZeonLap">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%B7%E7%AE%80%E8%A6%81%E6%8F%8F%E8%BF%B0rpki%E7%9A%84%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%8F%91%E4%BD%93%E7%B3%BB%E6%98%AF%E6%80%8E%E6%A0%B7%E6%9E%84%E6%88%90%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">1. 请简要描述RPKI的证书签发体系是怎样构成的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%81%E9%87%8F%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87%E5%BA%94%E8%AF%A5%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%EF%BC%9F%E6%A3%80%E6%B5%8B%E5%90%8E%E7%9A%84%E9%98%B2%E5%BE%A1%E6%89%8B%E6%AE%B5%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88%EF%BC%9F%E8%AF%B7%E5%90%84%E5%88%97%E4%B8%BE5%E6%9D%A1%E5%B9%B6%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">2. 流量检测算法设计目标应该包含什么？检测后的防御手段包含哪些方案？请各列举5条并简要分析</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&text=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&is_video=false&description=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测&body=Check out this article: http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&title=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&name=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&amp;10/&t=第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    Zeonlap
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/ZeonLap">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
