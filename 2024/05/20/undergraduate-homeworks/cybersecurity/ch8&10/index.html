@@ -6,20 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="1. 请简要描述RPKI的证书签发体系是怎样构成的 RPKI 架构的各个组成部分为：   证书签发体系：由分布全球的 RPKI 认证中心组成，用于 RPKI 资源证书签发。    证书存储系统：RPKI 涉及的所有证书都存放在 RPKI 资料库中，RPKI 资料库采用分布式存储结构，由很多数据库组成。   证书同步验证机制：RPKI 资料库可以供依赖方同步，RP 同步并验证 RPKI 证书 和签名">
+    <meta name="description" content="1. 请简要描述RPKI的证书签发体系是怎样构成的 RPKI 证书签发体系包括：  IANA：互联网数字分配机构 RIR：互联网注册管理机构 NIR&#x2F;LIR：国家&#x2F;本地互联网注册管理机构 ISP：互联网服务提供商  路由起源认证构成例子：   APNIC签发自签名的根证书①：{签发者：APNIC，接收者：APNIC，号码资源：10.1.0.0&#x2F;16，10.2.0.0&#x2F;16，AS1-AS99 }，证">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第8&amp;10讲 互联网路由安全&amp;互联网流量分析与检测">
 <meta property="og:url" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/index.html">
 <meta property="og:site_name" content="Let the voice of love take you higher!">
-<meta property="og:description" content="1. 请简要描述RPKI的证书签发体系是怎样构成的 RPKI 架构的各个组成部分为：   证书签发体系：由分布全球的 RPKI 认证中心组成，用于 RPKI 资源证书签发。    证书存储系统：RPKI 涉及的所有证书都存放在 RPKI 资料库中，RPKI 资料库采用分布式存储结构，由很多数据库组成。   证书同步验证机制：RPKI 资料库可以供依赖方同步，RP 同步并验证 RPKI 证书 和签名">
+<meta property="og:description" content="1. 请简要描述RPKI的证书签发体系是怎样构成的 RPKI 证书签发体系包括：  IANA：互联网数字分配机构 RIR：互联网注册管理机构 NIR&#x2F;LIR：国家&#x2F;本地互联网注册管理机构 ISP：互联网服务提供商  路由起源认证构成例子：   APNIC签发自签名的根证书①：{签发者：APNIC，接收者：APNIC，号码资源：10.1.0.0&#x2F;16，10.2.0.0&#x2F;16，AS1-AS99 }，证">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/image-20240519011839628.png">
 <meta property="og:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/download.png">
 <meta property="article:published_time" content="2024-05-19T16:11:53.605Z">
-<meta property="article:modified_time" content="2024-05-19T16:12:14.495Z">
+<meta property="article:modified_time" content="2024-05-20T03:24:59.119Z">
 <meta property="article:author" content="Zeonlap">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/image-20240519011839628.png">
+<meta name="twitter:image" content="http://zeonlap.github.io/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/download.png">
     
     
       
@@ -171,18 +170,12 @@
 
   <div class="content e-content" itemprop="articleBody">
     <h2 id="1-请简要描述rpki的证书签发体系是怎样构成的">1. 请简要描述RPKI的证书签发体系是怎样构成的</h2>
-<p>RPKI 架构的各个组成部分为：</p>
+<p>RPKI 证书签发体系包括：</p>
 <ul>
-<li>
-<p>证书签发体系：由分布全球的 RPKI 认证中心组成，用于 RPKI 资源证书签发。</p>
-<img src="/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/image-20240519011839628.png" style="zoom: 67%;">
-</li>
-<li>
-<p>证书存储系统：RPKI 涉及的所有证书都存放在 RPKI 资料库中，RPKI 资料库采用分布式存储结构，由很多数据库组成。</p>
-</li>
-<li>
-<p>证书同步验证机制：RPKI 资料库可以供依赖方同步，RP 同步并验证 RPKI 证书 和签名对象。RP 同步并验证后将验证结果（IP 地址前缀和 AS 号的绑定关系） 提供给互联网域间路由系统中的边界路由器指导路由过滤，该系统是由部署在不同网络自治域的BGP路由器组成。</p>
-</li>
+<li>IANA：互联网数字分配机构</li>
+<li>RIR：互联网注册管理机构</li>
+<li>NIR/LIR：国家/本地互联网注册管理机构</li>
+<li>ISP：互联网服务提供商</li>
 </ul>
 <p>路由起源认证构成例子：</p>
 <img src="/2024/05/20/undergraduate-homeworks/cybersecurity/ch8&10/download.png" style="zoom:67%;">
